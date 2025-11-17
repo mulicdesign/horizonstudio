@@ -21,13 +21,10 @@
             --bg-dark: #00171a;
             --bg-darker: #000000;
             --surface: #0a2a2d;
-            --surface-light: #0f3a3e;
-            --text-primary: #00171a;
-            --text-secondary: #00171a83;
+            --text-primary: #ffffff;
+            --text-secondary: #4a6b6f;
             --text-light: #d0d9d9;
-            --text-muted: #00171a80;
             --border: #4a999b;
-            --accent-blue: #027fb1;
             --accent-shadow: #00d8d880;
         }
 
@@ -59,24 +56,13 @@
 
         .logo {
             display: flex;
-            flex-direction: column;
             align-items: center;
             text-decoration: none;
-            gap: 4px;
         }
 
         .logo img {
-            width: 45px;
+            width: 60px;
             height: auto;
-        }
-
-        .logo-text {
-            color: var(--primary);
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-family: 'Inter', sans-serif;
         }
 
         .nav-menu {
@@ -104,17 +90,22 @@
             display: flex;
             gap: 0.5rem;
             align-items: center;
+            font-size: 16px;
+            font-weight: 500;
         }
 
         .lang-switch a {
             color: var(--text-secondary);
-            font-size: 16px;
-            font-weight: 500;
+            text-decoration: none;
             transition: color 0.3s;
         }
 
         .lang-switch a.active {
             color: var(--primary);
+        }
+
+        .lang-switch span {
+            color: var(--text-secondary);
         }
 
         .hamburger {
@@ -174,7 +165,7 @@
             font-size: 52px;
             line-height: 60px;
             font-weight: 600;
-            color: #fff;
+            color: var(--text-primary);
             margin-bottom: 1.5rem;
         }
 
@@ -250,7 +241,7 @@
         .feature-title {
             font-size: 20px;
             font-weight: 600;
-            color: #fff;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
 
@@ -263,7 +254,7 @@
         /* Services Section */
         .services {
             padding: 80px 5%;
-            background: var(--bg-darker);
+            background: var(--bg-dark);
         }
 
         .section-header {
@@ -275,7 +266,7 @@
             font-size: 32px;
             line-height: 40px;
             font-weight: 600;
-            color: #fff;
+            color: var(--text-primary);
             margin-bottom: 1rem;
         }
 
@@ -335,9 +326,10 @@
         /* Pricing Cards */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             margin-bottom: 4rem;
+            align-items: start;
         }
 
         .pricing-card {
@@ -346,6 +338,9 @@
             border-radius: 8px;
             border: 2px solid var(--border);
             transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            min-height: 600px;
         }
 
         .pricing-card:hover {
@@ -358,7 +353,7 @@
             font-size: 28px;
             line-height: 36px;
             font-weight: 600;
-            color: #fff;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
 
@@ -371,7 +366,8 @@
 
         .pricing-features {
             list-style: none;
-            margin-bottom: 2rem;
+            margin-bottom: auto;
+            flex-grow: 1;
         }
 
         .pricing-features li {
@@ -391,6 +387,10 @@
             font-size: 20px;
         }
 
+        .pricing-footer {
+            margin-top: 2rem;
+        }
+
         .pricing-price {
             font-size: 24px;
             line-height: 32px;
@@ -402,7 +402,7 @@
         .pricing-timeline {
             font-size: 12px;
             line-height: 16px;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
         }
 
@@ -449,7 +449,7 @@
             font-size: 20px;
             line-height: 28px;
             font-weight: 600;
-            color: #fff;
+            color: var(--text-primary);
         }
 
         .accordion-icon {
@@ -531,15 +531,13 @@
             width: 100%;
             border-radius: 8px;
             overflow: hidden;
-            background: var(--surface);
-            padding: 1rem;
         }
 
         .portfolio-image img {
             width: 100%;
             height: auto;
             transition: transform 0.3s;
-            border-radius: 4px;
+            border-radius: 8px;
         }
 
         .portfolio-image:hover img {
@@ -550,7 +548,7 @@
             font-size: 28px;
             line-height: 36px;
             font-weight: 600;
-            color: #fff;
+            color: var(--text-primary);
             margin-bottom: 1rem;
         }
 
@@ -563,7 +561,7 @@
         /* About Section */
         .about {
             padding: 80px 5%;
-            background: var(--bg-darker);
+            background: var(--bg-dark);
             text-align: center;
         }
 
@@ -653,10 +651,9 @@
             margin-bottom: 3rem;
         }
 
-        .footer-about h3 {
-            color: var(--primary);
+        .footer-about .logo img {
+            width: 60px;
             margin-bottom: 1rem;
-            font-size: 18px;
         }
 
         .footer-about p {
@@ -666,7 +663,7 @@
         }
 
         .footer-links h4 {
-            color: #fff;
+            color: var(--text-primary);
             margin-bottom: 1rem;
             font-size: 16px;
             text-transform: uppercase;
@@ -689,6 +686,14 @@
 
         .footer-links a:hover {
             color: var(--primary);
+        }
+
+        .footer-contact h4 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
         .footer-contact p {
@@ -725,7 +730,6 @@
         .footer-bottom {
             text-align: center;
             padding-top: 2rem;
-            border-top: 1px solid var(--border);
             font-size: 12px;
             line-height: 16px;
             color: var(--text-secondary);
@@ -814,8 +818,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <a href="#" class="logo">
-            <img src="assets/Logo.svg" alt="Horizon Studio Logo">
-            <span class="logo-text">HORIZON STUDIO</span>
+            <img src="assets/Logo.svg" alt="Horizon Studio">
         </a>
         <ul class="nav-menu" id="navMenu">
             <li><a href="#services">Usluge</a></li>
@@ -824,7 +827,7 @@
             <li><a href="#contact">Kontakt</a></li>
             <li class="lang-switch">
                 <a href="#" class="active">SR</a>
-                <span style="color: var(--text-secondary);">|</span>
+                <span>|</span>
                 <a href="index-en.html">EN</a>
             </li>
         </ul>
@@ -892,53 +895,59 @@
                     <ul class="pricing-features">
                         <li>UX konsultacije (do 1h)</li>
                         <li>1 korisnički tok</li>
-                        <li>UI dizajn za 1-2 stranice (high-fidelity dizajn; low-fidelity wireframe na zahtev)</li>
+                        <li>UI dizajn za 1-2 stranice<br>(high-fidelity dizajn;<br>low-fidelity wireframe na zahtev)</li>
                         <li>1 runda izmena</li>
                     </ul>
-                    <p class="pricing-price">od 150 €</p>
-                    <p class="pricing-timeline">Rok: 3-5 radnih dana<br>Portfolija • Instagram prodavnice • Landing stranice</p>
-                    <button class="pricing-button">Zatraži Ponudu</button>
+                    <div class="pricing-footer">
+                        <p class="pricing-price">od 150 €</p>
+                        <p class="pricing-timeline">Rok: 3-5 radnih dana<br>Portfolija • Instagram prodavnice • Landing stranice</p>
+                        <button class="pricing-button">Zatraži Ponudu</button>
+                    </div>
                 </div>
 
                 <div class="pricing-card">
                     <h3 class="pricing-title">Standard</h3>
                     <p class="pricing-subtitle">Za male biznise i e-commerce</p>
                     <ul class="pricing-features">
-                        <li>Osnovno UX istraživanje (ciljna grupa, ciljevi)</li>
+                        <li>Osnovno UX istraživanje<br>(ciljna grupa, ciljevi)</li>
                         <li>Sitemap i korisnički tokovi</li>
-                        <li>UI dizajn do 5 ekrana (high-fidelity dizajn; low-fidelity wireframe opciono)</li>
-                        <li>Osnovni design sistem (boje, tipografija, osnovni UI elementi)</li>
-                        <li>Klikabilan prototip (desktop i mobilna verzija)</li>
+                        <li>UI dizajn do 5 ekrana<br>(high-fidelity dizajn;<br>low-fidelity wireframe opciono)</li>
+                        <li>Osnovni design sistem<br>(boje, tipografija, osnovni UI elementi)</li>
+                        <li>Klikabilan prototip<br>(desktop i mobilna verzija)</li>
                         <li>2 runde izmena</li>
                     </ul>
-                    <p class="pricing-price">od 450-600 €</p>
-                    <p class="pricing-timeline">Rok: 7-10 radnih dana<br>Lokalne usluge • Saloni, restorani • Online prodavnice</p>
-                    <button class="pricing-button">Zatraži Ponudu</button>
+                    <div class="pricing-footer">
+                        <p class="pricing-price">od 450-600 €</p>
+                        <p class="pricing-timeline">Rok: 7-10 radnih dana<br>Lokalne usluge • Saloni, restorani • Online prodavnice</p>
+                        <button class="pricing-button">Zatraži Ponudu</button>
+                    </div>
                 </div>
 
                 <div class="pricing-card">
                     <h3 class="pricing-title">Premium</h3>
                     <p class="pricing-subtitle">Za startape i složene digitalne proizvode</p>
                     <ul class="pricing-features">
-                        <li>Detaljno UX istraživanje (ciljevi, problemi korisnika, analiza konkurencije)</li>
+                        <li>Detaljno UX istraživanje<br>(ciljevi, problemi korisnika, analiza konkurencije)</li>
                         <li>Kompleksni korisnički tokovi</li>
-                        <li>Wireframe svih ključnih ekrana (low/high-fidelity po potrebi)</li>
-                        <li>UI dizajn (desktop + mobilna verzija, u Figmi)</li>
-                        <li>Kompletan design sistem (stil vodič + biblioteka UI komponenti)</li>
+                        <li>Wireframe svih ključnih ekrana<br>(low/high-fidelity po potrebi)</li>
+                        <li>UI dizajn<br>(desktop + mobilna verzija, u Figmi)</li>
+                        <li>Kompletan design sistem<br>(stil vodič + biblioteka UI komponenti)</li>
                         <li>Interaktivni prototip spreman za testiranje sa korisnicima</li>
                         <li>Konsultacije sa frontend programerom</li>
                         <li>3+ rundi izmena</li>
                     </ul>
-                    <p class="pricing-price">od 1000 €</p>
-                    <p class="pricing-timeline">Rok: 2-3 nedelje (u zavisnosti od obima projekta)<br>Kompletan UX/UI • Prototipi i testiranje • Brend prezentacije</p>
-                    <button class="pricing-button">Zatraži Ponudu</button>
+                    <div class="pricing-footer">
+                        <p class="pricing-price">od 1000 €</p>
+                        <p class="pricing-timeline">Rok: 2-3 nedelje (u zavisnosti od obima projekta)<br>Kompletan UX/UI • Prototipi i testiranje • Brend prezentacije</p>
+                        <button class="pricing-button">Zatraži Ponudu</button>
+                    </div>
                 </div>
             </div>
 
             <!-- Additional Services -->
             <div style="margin-top: 4rem;">
                 <h3 style="text-align: center; font-size: 24px; line-height: 32px; color: #fff; margin-bottom: 2rem;">Dodatne Usluge</h3>
-                <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
                     <div class="pricing-card">
                         <h4 style="font-size: 20px; line-height: 28px; color: #fff; margin-bottom: 1rem;">Dizajn Za Tvoj Biznis</h4>
                         <ul class="pricing-features">
@@ -949,7 +958,9 @@
                             <li>Card sorting / OOUX mapiranje</li>
                             <li>Analiza konkurencije i market research</li>
                         </ul>
-                        <button class="pricing-button">Zatraži Ponudu</button>
+                        <div class="pricing-footer">
+                            <button class="pricing-button">Zatraži Ponudu</button>
+                        </div>
                     </div>
                     <div class="pricing-card">
                         <h4 style="font-size: 20px; line-height: 28px; color: #fff; margin-bottom: 1rem;">Dodatne Usluge</h4>
@@ -961,7 +972,9 @@
                             <li>Ilustracije</li>
                             <li>Web animacije</li>
                         </ul>
-                        <button class="pricing-button">Zatraži Ponudu</button>
+                        <div class="pricing-footer">
+                            <button class="pricing-button">Zatraži Ponudu</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -969,7 +982,6 @@
 
         <!-- Graphic Design Tab Content -->
         <div class="tab-content" id="graphic">
-            <!-- Desktop: Pricing Grid -->
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3 class="pricing-title">Logo I Brend Identitet</h3>
@@ -984,7 +996,9 @@
                         <li>Vizit karta - od 30 €/kom</li>
                         <li>Memorandum - od 30 €/kom</li>
                     </ul>
-                    <button class="pricing-button">Zatraži Ponudu</button>
+                    <div class="pricing-footer">
+                        <button class="pricing-button">Zatraži Ponudu</button>
+                    </div>
                 </div>
 
                 <div class="pricing-card">
@@ -1000,7 +1014,9 @@
                         <li>Ulaznice - od 20 €/kom</li>
                         <li>Potpis za email - od 25 €/kom</li>
                     </ul>
-                    <button class="pricing-button">Zatraži Ponudu</button>
+                    <div class="pricing-footer">
+                        <button class="pricing-button">Zatraži Ponudu</button>
+                    </div>
                 </div>
 
                 <div class="pricing-card">
@@ -1015,7 +1031,9 @@
                         <li>Merch (šolje, majice, etikete, itd. priprema + mockup) - od 60 €/kom</li>
                         <li>Izmena cenovnika/jelovnika - od 8 €/str</li>
                     </ul>
-                    <button class="pricing-button">Zatraži Ponudu</button>
+                    <div class="pricing-footer">
+                        <button class="pricing-button">Zatraži Ponudu</button>
+                    </div>
                 </div>
             </div>
 
@@ -1182,15 +1200,14 @@
         <div class="footer-content">
             <div class="footer-about">
                 <div class="logo">
-                    <img src="assets/Logo.svg" alt="Horizon Studio Logo" style="width: 50px;">
-                    <span class="logo-text">HORIZON STUDIO</span>
+                    <img src="assets/Logo.svg" alt="Horizon Studio">
                 </div>
-                <p style="margin-top: 1rem;">Horizon Studio je dizajn studio fokusiran na jasnoću, funkcionalnost i vizuelnu dosljednost.</p>
+                <p>Horizon Studio je dizajn studio fokusiran na jasnoću, funkcionalnost i vizuelnu dosljednost.</p>
                 <div class="social-icons">
-                    <a href="#"><i class="fab fa-dribbble"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
             <div class="footer-links">
@@ -1258,11 +1275,9 @@
 
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Remove active class from all buttons and contents
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 tabContents.forEach(content => content.classList.remove('active'));
 
-                // Add active class to clicked button and corresponding content
                 button.classList.add('active');
                 const tabId = button.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
@@ -1277,12 +1292,10 @@
                 const accordionItem = header.parentElement;
                 const isActive = accordionItem.classList.contains('active');
 
-                // Close all accordion items
                 document.querySelectorAll('.accordion-item').forEach(item => {
                     item.classList.remove('active');
                 });
 
-                // Open clicked item if it wasn't active
                 if (!isActive) {
                     accordionItem.classList.add('active');
                 }
@@ -1299,11 +1312,11 @@
             }
         });
 
-        // Form Submission (Placeholder)
+        // Form Submission
         document.querySelector('.contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('Hvala na poruci! Javićemo se uskoro.');
         });
     </script>
 </body>
-</html></li>
+</html>
