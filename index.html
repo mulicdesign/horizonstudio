@@ -6,7 +6,7 @@
     <title>Horizon Studio - UI/UX & Grafički Dizajn</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -16,22 +16,19 @@
         }
 
         :root {
-            --primary: #00d9db;
-            --primary-dark: #00b8ba;
+            --primary: #00d6d6;
             --bg-dark: #00171a;
-            --bg-darker: #000000;
-            --surface: #0a2a2d;
-            --text-primary: #ffffff;
-            --text-secondary: #4a6b6f;
-            --text-light: #d0d9d9;
-            --border: #4a999b;
-            --accent-shadow: #00d8d880;
+            --bg-black: #000000;
+            --text-white: #ffffff;
+            --text-dark: #00171a;
+            --border-color: #cdd6d7;
+            --input-bg: #d9d9d9;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-dark);
-            color: var(--text-light);
+            color: var(--text-white);
             line-height: 1.5;
             overflow-x: hidden;
         }
@@ -40,45 +37,58 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        /* Navbar */
-        .navbar {
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: var(--bg-darker);
-            padding: 1rem 5%;
+            height: 111px;
+            background: var(--bg-dark);
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
-        .logo {
+        .header.scrolled {
+            background: var(--bg-black);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-content {
+            width: 100%;
+            max-width: 1140px;
             display: flex;
             align-items: center;
-            text-decoration: none;
+            justify-content: space-between;
+            padding: 0 20px;
         }
 
         .logo img {
-            width: 60px;
-            height: auto;
+            height: 63px;
         }
 
         .nav-menu {
             display: flex;
-            gap: 2rem;
+            gap: 40px;
             list-style: none;
             align-items: center;
         }
 
         .nav-menu a {
-            color: var(--text-light);
+            color: var(--text-white);
             text-decoration: none;
             font-size: 16px;
+            line-height: 24px;
             font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 0.48px;
             transition: color 0.3s;
         }
 
@@ -88,24 +98,33 @@
 
         .lang-switch {
             display: flex;
-            gap: 0.5rem;
+            gap: 8px;
             align-items: center;
-            font-size: 16px;
-            font-weight: 500;
         }
 
         .lang-switch a {
-            color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
         }
 
         .lang-switch a.active {
+            font-size: 20px;
+            line-height: 20px;
+            font-weight: 600;
             color: var(--primary);
         }
 
+        .lang-switch a:not(.active) {
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--text-white);
+            opacity: 0.6;
+        }
+
         .lang-switch span {
-            color: var(--text-secondary);
+            color: var(--text-white);
+            opacity: 0.6;
         }
 
         .hamburger {
@@ -113,7 +132,6 @@
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
-            z-index: 1001;
         }
 
         .hamburger span {
@@ -123,176 +141,149 @@
             transition: all 0.3s;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
         /* Hero Section */
         .hero {
+            padding: 191px 0 80px;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 120px 5% 60px;
-            gap: 4rem;
-            background: var(--bg-dark);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 526px;
+            gap: 60px;
+            align-items: center;
         }
 
         .hero-content {
-            flex: 1;
-            max-width: 600px;
+            max-width: 554px;
         }
 
-        .hero-eyebrow {
-            font-size: 14px;
-            line-height: 20px;
+        .hero-tagline {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            line-height: 36px;
             font-weight: 400;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 7px;
+            color: var(--text-white);
+            margin-bottom: 16px;
         }
 
         .hero-title {
+            font-family: 'Outfit', sans-serif;
             font-size: 52px;
             line-height: 60px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
+            font-weight: 500;
+            color: var(--text-white);
+            margin-bottom: 24px;
         }
 
         .hero-subtitle {
-            font-size: 20px;
-            line-height: 28px;
-            font-weight: 400;
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            line-height: 36px;
+            font-weight: 300;
             color: var(--primary);
-            margin-bottom: 2rem;
+            margin-bottom: 32px;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 18px 24px;
+            padding: 16px 32px;
             background: var(--primary);
             color: var(--bg-dark);
             text-decoration: none;
-            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
             font-size: 18px;
+            line-height: 24px;
+            font-weight: 500;
+            letter-spacing: 0.54px;
             text-transform: uppercase;
-            letter-spacing: 3px;
             border-radius: 4px;
             transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
         .cta-button:hover {
-            background: var(--primary-dark);
+            background: #00b8b8;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px var(--accent-shadow);
-        }
-
-        .hero-image {
-            flex: 1;
-            max-width: 500px;
+            box-shadow: 0 8px 20px rgba(0, 214, 214, 0.3);
         }
 
         .hero-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
+            width: 526px;
+            height: 445px;
+            border-radius: 12px;
+            object-fit: cover;
         }
 
-        /* Features Section */
-        .features {
-            padding: 80px 5%;
+        /* Mini Card Bar */
+        .mini-cards {
+            padding: 80px 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            background: var(--bg-dark);
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
         }
 
-        .feature-card {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: 8px;
+        .mini-card {
             text-align: center;
-            transition: all 0.3s;
-            border: 1px solid transparent;
+            transition: transform 0.3s;
         }
 
-        .feature-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 8px 30px var(--accent-shadow);
+        .mini-card:hover {
             transform: translateY(-5px);
         }
 
-        .feature-icon {
+        .mini-card-icon {
             font-size: 48px;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 16px;
         }
 
-        .feature-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-description {
+        .mini-card-title {
             font-size: 16px;
             line-height: 24px;
-            color: var(--text-secondary);
+            font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 8px;
+        }
+
+        .mini-card-desc {
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 400;
+            color: var(--text-white);
         }
 
         /* Services Section */
         .services {
-            padding: 80px 5%;
-            background: var(--bg-dark);
+            padding: 80px 0 130px;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 48px;
         }
 
-        .section-title {
-            font-size: 32px;
-            line-height: 40px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            font-size: 18px;
-            line-height: 24px;
-            color: var(--primary);
-        }
-
-        .tab-buttons {
+        .tab-bar {
             display: flex;
             justify-content: center;
             gap: 0;
-            margin-bottom: 3rem;
+            margin-bottom: 40px;
         }
 
         .tab-btn {
             padding: 12px 32px;
             background: transparent;
-            color: var(--text-light);
-            border: 2px solid var(--border);
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s;
+            color: var(--text-white);
+            border: 2px solid var(--primary);
             font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
         .tab-btn:first-child {
@@ -304,15 +295,30 @@
             border-left: none;
         }
 
-        .tab-btn:hover:not(.active) {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
         .tab-btn.active {
             background: var(--primary);
             color: var(--bg-dark);
-            border-color: var(--primary);
+        }
+
+        .tab-btn:not(.active):hover {
+            background: rgba(0, 214, 214, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            line-height: 40px;
+            font-weight: 500;
+            color: var(--text-white);
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            line-height: 32px;
+            font-weight: 300;
+            color: var(--primary);
         }
 
         .tab-content {
@@ -326,122 +332,143 @@
         /* Pricing Cards */
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-            align-items: start;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .pricing-grid.two-col {
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .pricing-card {
-            background: var(--surface);
-            padding: 2.5rem;
-            border-radius: 8px;
-            border: 2px solid var(--border);
-            transition: all 0.3s;
+            background: rgba(10, 42, 45, 0.6);
+            border: 2px solid rgba(74, 153, 155, 0.3);
+            border-radius: 12px;
+            padding: 40px 32px;
             display: flex;
             flex-direction: column;
+            transition: all 0.3s;
             min-height: 600px;
         }
 
         .pricing-card:hover {
             border-color: var(--primary);
-            box-shadow: 0 12px 40px var(--accent-shadow);
+            box-shadow: 0 12px 40px rgba(0, 214, 214, 0.2);
             transform: translateY(-8px);
         }
 
         .pricing-title {
+            font-family: 'Outfit', sans-serif;
             font-size: 28px;
             line-height: 36px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-white);
+            text-align: center;
+            margin-bottom: 8px;
         }
 
         .pricing-subtitle {
             font-size: 16px;
             line-height: 24px;
+            font-weight: 400;
             color: var(--primary);
-            margin-bottom: 2rem;
+            text-align: center;
+            margin-bottom: 32px;
         }
 
-        .pricing-features {
-            list-style: none;
-            margin-bottom: auto;
+        .pricing-body {
             flex-grow: 1;
+            margin-bottom: 32px;
+            text-align: center;
         }
 
-        .pricing-features li {
-            font-size: 16px;
-            line-height: 24px;
-            color: var(--text-secondary);
-            margin-bottom: 0.8rem;
-            padding-left: 1.5rem;
-            position: relative;
+        .pricing-body p,
+        .pricing-body ul {
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+            color: var(--text-white);
+            list-style: none;
+            margin-bottom: 12px;
         }
 
-        .pricing-features li:before {
-            content: "•";
-            color: var(--primary);
-            position: absolute;
-            left: 0;
-            font-size: 20px;
+        .pricing-body .caption {
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .pricing-divider {
+            height: 1px;
+            background: rgba(74, 153, 155, 0.3);
+            margin: 24px 0;
         }
 
         .pricing-footer {
-            margin-top: 2rem;
+            text-align: center;
         }
 
         .pricing-price {
-            font-size: 24px;
-            line-height: 32px;
+            font-size: 16px;
+            line-height: 26px;
             font-weight: 600;
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
         }
 
         .pricing-timeline {
             font-size: 12px;
             line-height: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            font-weight: 400;
+            color: var(--text-white);
+            margin-bottom: 8px;
+        }
+
+        .pricing-examples {
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 400;
+            color: var(--text-white);
+            margin-bottom: 20px;
         }
 
         .pricing-button {
             width: 100%;
-            padding: 16px;
+            padding: 14px 24px;
             background: var(--primary);
             color: var(--bg-dark);
             border: none;
             border-radius: 4px;
-            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
             font-size: 16px;
+            line-height: 20px;
+            font-weight: 500;
+            letter-spacing: 0.32px;
             text-transform: uppercase;
-            letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .pricing-button:hover {
-            background: var(--primary-dark);
+            background: #00b8b8;
             transform: translateY(-2px);
         }
 
         /* Accordion (Mobile Only) */
         .accordion {
             display: none;
-            margin-bottom: 4rem;
         }
 
         .accordion-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-bottom: 1rem;
+            background: rgba(10, 42, 45, 0.6);
+            border: 1px solid rgba(74, 153, 155, 0.3);
+            border-radius: 12px;
+            margin-bottom: 16px;
             overflow: hidden;
         }
 
         .accordion-header {
-            padding: 1.5rem;
+            padding: 20px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -449,7 +476,7 @@
             font-size: 20px;
             line-height: 28px;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--text-white);
         }
 
         .accordion-icon {
@@ -468,119 +495,127 @@
         }
 
         .accordion-item.active .accordion-content {
-            max-height: 2000px;
+            max-height: 3000px;
         }
 
         .accordion-body {
-            padding: 0 1.5rem 1.5rem;
+            padding: 0 20px 20px;
         }
 
-        .accordion-body ul {
-            list-style: none;
-        }
-
-        .accordion-body li {
+        .service-row {
             display: flex;
             justify-content: space-between;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(74, 153, 155, 0.3);
             font-size: 16px;
             line-height: 24px;
         }
 
-        .accordion-body li:last-child {
+        .service-row:last-child {
             border-bottom: none;
         }
 
         .service-name {
-            color: var(--text-light);
+            color: var(--text-white);
+            flex: 1;
         }
 
         .service-price {
             color: var(--primary);
             font-weight: 600;
+            text-align: right;
+            margin-left: 16px;
+        }
+
+        .service-note {
+            font-size: 12px;
+            line-height: 16px;
+            color: var(--text-white);
+            text-align: right;
+            margin-top: 4px;
         }
 
         /* Portfolio Section */
         .portfolio {
-            padding: 80px 5%;
-            background: var(--bg-dark);
+            padding: 80px 0 130px;
         }
 
-        .portfolio-grid {
+        .portfolio-block {
             display: grid;
-            gap: 4rem;
-        }
-
-        .portfolio-item {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            grid-template-columns: 520px 1fr;
+            gap: 60px;
             align-items: center;
+            margin-bottom: 40px;
         }
 
-        .portfolio-item:nth-child(even) {
-            direction: rtl;
+        .portfolio-block:nth-child(even) {
+            grid-template-columns: 1fr 520px;
         }
 
-        .portfolio-item:nth-child(even) > * {
-            direction: ltr;
-        }
-
-        .portfolio-image {
-            width: 100%;
-            border-radius: 8px;
-            overflow: hidden;
+        .portfolio-block:nth-child(even) .portfolio-image {
+            order: 2;
         }
 
         .portfolio-image img {
-            width: 100%;
-            height: auto;
+            width: 520px;
+            height: 320px;
+            border-radius: 12px;
+            object-fit: cover;
             transition: transform 0.3s;
-            border-radius: 8px;
         }
 
         .portfolio-image:hover img {
             transform: scale(1.05);
         }
 
-        .portfolio-info h3 {
-            font-size: 28px;
-            line-height: 36px;
+        .portfolio-content h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            line-height: 32px;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
+            color: var(--text-white);
+            text-align: center;
+            margin-bottom: 16px;
         }
 
-        .portfolio-info p {
+        .portfolio-content p {
             font-size: 16px;
             line-height: 24px;
-            color: var(--text-secondary);
+            font-weight: 400;
+            color: var(--text-white);
+            text-align: left;
         }
 
         /* About Section */
         .about {
-            padding: 80px 5%;
-            background: var(--bg-dark);
-            text-align: center;
+            padding: 80px 0 130px;
         }
 
         .about-content {
-            max-width: 800px;
+            max-width: 840px;
             margin: 0 auto;
         }
 
-        .about-content p {
+        .about-text {
+            margin-top: 40px;
+        }
+
+        .about-text p {
             font-size: 16px;
             line-height: 24px;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
+            font-weight: 400;
+            color: var(--text-white);
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .about-text p:first-child strong {
+            font-weight: 600;
         }
 
         /* Contact Section */
         .contact {
-            padding: 80px 5%;
-            background: var(--bg-dark);
+            padding: 80px 0 130px;
         }
 
         .contact-form {
@@ -589,28 +624,46 @@
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 24px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
             font-size: 14px;
             line-height: 20px;
-            color: var(--text-light);
+            color: var(--text-white);
+            text-align: left;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            color: var(--text-light);
+            padding: 14px;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
             font-family: 'Inter', sans-serif;
             font-size: 16px;
             line-height: 24px;
+            color: var(--text-dark);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(0, 23, 26, 0.5);
+        }
+
+        .form-group input:hover,
+        .form-group textarea:hover {
+            border-color: var(--primary);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
         }
 
         .form-group textarea {
@@ -625,88 +678,56 @@
             color: var(--bg-dark);
             border: none;
             border-radius: 4px;
-            font-weight: 600;
-            font-size: 16px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: 500;
+            letter-spacing: 0.54px;
             text-transform: uppercase;
-            letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .submit-button:hover {
-            background: var(--primary-dark);
+            background: #00b8b8;
             transform: translateY(-2px);
         }
 
         /* Footer */
         .footer {
-            background: var(--bg-darker);
-            padding: 60px 5% 30px;
+            background: var(--bg-black);
+            padding: 80px 0 0;
         }
 
         .footer-content {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 3rem;
+            gap: 60px;
         }
 
-        .footer-about .logo img {
-            width: 60px;
-            margin-bottom: 1rem;
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
-        .footer-about p {
+        .footer-logo img {
+            height: 103px;
+        }
+
+        .footer-text {
             font-size: 16px;
             line-height: 24px;
-            color: var(--text-secondary);
-        }
-
-        .footer-links h4 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 16px;
-            line-height: 24px;
-            transition: color 0.3s;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-contact h4 {
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .footer-contact p {
-            font-size: 16px;
-            line-height: 24px;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            font-weight: 400;
+            color: var(--text-white);
         }
 
         .social-icons {
             display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 16px;
         }
 
         .social-icons a {
@@ -715,41 +736,84 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--surface);
-            color: var(--text-light);
-            border-radius: 50%;
-            transition: all 0.3s;
+            color: var(--text-white);
+            transition: color 0.3s;
         }
 
         .social-icons a:hover {
-            background: var(--primary);
-            color: var(--bg-dark);
-            transform: translateY(-3px);
+            color: var(--primary);
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            font-size: 12px;
-            line-height: 16px;
-            color: var(--text-secondary);
-        }
-
-        .footer-legal {
+        .footer-middle,
+        .footer-right {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 0.5rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 24px;
         }
 
-        .footer-legal a {
-            color: var(--text-secondary);
+        .footer-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 300;
+            letter-spacing: 0.98px;
+            text-transform: uppercase;
+            color: var(--text-white);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .footer-links a {
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 500;
+            letter-spacing: 0.48px;
+            color: var(--text-white);
             text-decoration: none;
             transition: color 0.3s;
         }
 
-        .footer-legal a:hover {
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-contact p {
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 400;
+            color: var(--text-white);
+            text-align: center;
+        }
+
+        .footer-bottom {
+            background: var(--bg-black);
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            font-size: 12px;
+            line-height: 16px;
+            color: var(--text-white);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-bottom-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
             color: var(--primary);
         }
 
@@ -761,9 +825,9 @@
                 right: -100%;
                 width: 70%;
                 height: 100vh;
-                background: var(--bg-darker);
+                background: var(--bg-black);
                 flex-direction: column;
-                padding: 100px 2rem;
+                padding: 120px 32px;
                 transition: right 0.3s;
                 align-items: flex-start;
             }
@@ -776,332 +840,536 @@
                 display: flex;
             }
 
-            .hero {
-                flex-direction: column;
+            .hero-grid {
+                grid-template-columns: 1fr;
                 text-align: center;
-                padding-top: 100px;
             }
 
-            .hero-title {
-                font-size: 40px;
-                line-height: 48px;
+            .hero-image img {
+                width: 100%;
+                height: auto;
             }
 
-            .hero-subtitle {
-                font-size: 18px;
-                line-height: 26px;
-            }
-
-            .features {
+            .mini-cards {
                 grid-template-columns: 1fr;
             }
 
             .pricing-grid {
-                display: none;
+                display: none !important;
             }
 
             .accordion {
                 display: block;
             }
 
-            .portfolio-item {
+            .portfolio-block,
+            .portfolio-block:nth-child(even) {
                 grid-template-columns: 1fr;
+            }
+
+            .portfolio-image img {
+                width: 100%;
+                height: auto;
             }
 
             .footer-content {
                 grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-links {
+                align-items: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                height: auto;
+                padding: 16px;
+                gap: 8px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <img src="assets/Logo.svg" alt="Horizon Studio">
-        </a>
-        <ul class="nav-menu" id="navMenu">
-            <li><a href="#services">Usluge</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#about">O nama</a></li>
-            <li><a href="#contact">Kontakt</a></li>
-            <li class="lang-switch">
-                <a href="#" class="active">SR</a>
-                <span>|</span>
-                <a href="index-en.html">EN</a>
-            </li>
-        </ul>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <img src="assets/Logo.svg" alt="Horizon Studio">
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#services">Usluge</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">O nama</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+                <li class="lang-switch">
+                    <a href="#" class="active">SR</a>
+                    <span>|</span>
+                    <a href="index-en.html">EN</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <p class="hero-eyebrow">Imaš ideju? Mi je pretvaramo u dizajn</p>
-            <h1 class="hero-title">UI/UX I Grafički Dizajn Za Web I Aplikacije</h1>
-            <p class="hero-subtitle">Pažljivo osmišljeni paketi dizajna za prepoznatljiv identitet</p>
-            <a href="#contact" class="cta-button">Započni Projekat</a>
-        </div>
-        <div class="hero-image">
-            <img src="assets/Herocover.png" alt="Typography Design">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <p class="hero-tagline">Imaš ideju? Mi je pretvaramo u dizajn</p>
+                    <h1 class="hero-title">UI/UX I Grafički Dizajn Za Web I Aplikacije</h1>
+                    <p class="hero-subtitle">Pažljivo osmišljeni paketi dizajna za prepoznatljiv identitet</p>
+                    <button class="cta-button">Započni Projekat</button>
+                </div>
+                <div class="hero-image">
+                    <img src="assets/Herocoverimage.png" alt="Typography Design">
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Features -->
-    <section class="features">
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-palette"></i></div>
-            <h3 class="feature-title">UI dizajn</h3>
-            <p class="feature-description">Lepi, moderni interfejsi koji odražavaju identitet vašeg brenda</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-search"></i></div>
-            <h3 class="feature-title">Istraživanje korisnika</h3>
-            <p class="feature-description">Uvidi zasnovani na podacima koji vam pomažu da bolje razumete svoje korisnike</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-drafting-compass"></i></div>
-            <h3 class="feature-title">Prototipiranje</h3>
-            <p class="feature-description">Interaktivni prototipovi za testiranje, potvrđivanje i usavršavanje vaših ideja</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
-            <h3 class="feature-title">Mobilni dizajn</h3>
-            <p class="feature-description">Nativni i responzivni dizajni optimizovani za sve uređaje</p>
+    <!-- Mini Card Bar -->
+    <section class="mini-cards-section">
+        <div class="container">
+            <div class="mini-cards">
+                <div class="mini-card">
+                    <div class="mini-card-icon"><i class="fas fa-palette"></i></div>
+                    <h3 class="mini-card-title">UI dizajn</h3>
+                    <p class="mini-card-desc">Lepi, moderni interfejsi koji odražavaju identitet vašeg brenda</p>
+                </div>
+                <div class="mini-card">
+                    <div class="mini-card-icon"><i class="fas fa-search"></i></div>
+                    <h3 class="mini-card-title">Istraživanje korisnika</h3>
+                    <p class="mini-card-desc">Uvidi zasnovani na podacima koji vam pomažu da bolje razumete svoje korisnike</p>
+                </div>
+                <div class="mini-card">
+                    <div class="mini-card-icon"><i class="fas fa-drafting-compass"></i></div>
+                    <h3 class="mini-card-title">Prototipiranje</h3>
+                    <p class="mini-card-desc">Interaktivni prototipovi za testiranje, potvrđivanje i usavršavanje vaših ideja</p>
+                </div>
+                <div class="mini-card">
+                    <div class="mini-card-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3 class="mini-card-title">Mobilni dizajn</h3>
+                    <p class="mini-card-desc">Nativni i responzivni dizajni optimizovani za sve uređaje</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Services Section -->
     <section class="services" id="services">
-        <div class="section-header">
-            <div class="tab-buttons">
-                <button class="tab-btn active" data-tab="uiux">UI/UX Dizajn</button>
-                <button class="tab-btn" data-tab="graphic">Grafički Dizajn</button>
-            </div>
-            <h2 class="section-title">UI/UX Dizajn Za Web I Mobilne Aplikacije</h2>
-            <p class="section-subtitle">Wireframe, prototipi i dizajn sistema - od ideje do prototipa</p>
-        </div>
-
-        <!-- UI/UX Tab Content -->
-        <div class="tab-content active" id="uiux">
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3 class="pricing-title">Starter</h3>
-                    <p class="pricing-subtitle">Za lične brendove i jednostavne sajtove</p>
-                    <ul class="pricing-features">
-                        <li>UX konsultacije (do 1h)</li>
-                        <li>1 korisnički tok</li>
-                        <li>UI dizajn za 1-2 stranice<br>(high-fidelity dizajn;<br>low-fidelity wireframe na zahtev)</li>
-                        <li>1 runda izmena</li>
-                    </ul>
-                    <div class="pricing-footer">
-                        <p class="pricing-price">od 150 €</p>
-                        <p class="pricing-timeline">Rok: 3-5 radnih dana<br>Portfolija • Instagram prodavnice • Landing stranice</p>
-                        <button class="pricing-button">Zatraži Ponudu</button>
-                    </div>
+        <div class="container">
+            <div class="section-header">
+                <div class="tab-bar">
+                    <button class="tab-btn active" data-tab="uiux">UI/UX Dizajn</button>
+                    <button class="tab-btn" data-tab="graphic">Grafički Dizajn</button>
                 </div>
-
-                <div class="pricing-card">
-                    <h3 class="pricing-title">Standard</h3>
-                    <p class="pricing-subtitle">Za male biznise i e-commerce</p>
-                    <ul class="pricing-features">
-                        <li>Osnovno UX istraživanje<br>(ciljna grupa, ciljevi)</li>
-                        <li>Sitemap i korisnički tokovi</li>
-                        <li>UI dizajn do 5 ekrana<br>(high-fidelity dizajn;<br>low-fidelity wireframe opciono)</li>
-                        <li>Osnovni design sistem<br>(boje, tipografija, osnovni UI elementi)</li>
-                        <li>Klikabilan prototip<br>(desktop i mobilna verzija)</li>
-                        <li>2 runde izmena</li>
-                    </ul>
-                    <div class="pricing-footer">
-                        <p class="pricing-price">od 450-600 €</p>
-                        <p class="pricing-timeline">Rok: 7-10 radnih dana<br>Lokalne usluge • Saloni, restorani • Online prodavnice</p>
-                        <button class="pricing-button">Zatraži Ponudu</button>
-                    </div>
-                </div>
-
-                <div class="pricing-card">
-                    <h3 class="pricing-title">Premium</h3>
-                    <p class="pricing-subtitle">Za startape i složene digitalne proizvode</p>
-                    <ul class="pricing-features">
-                        <li>Detaljno UX istraživanje<br>(ciljevi, problemi korisnika, analiza konkurencije)</li>
-                        <li>Kompleksni korisnički tokovi</li>
-                        <li>Wireframe svih ključnih ekrana<br>(low/high-fidelity po potrebi)</li>
-                        <li>UI dizajn<br>(desktop + mobilna verzija, u Figmi)</li>
-                        <li>Kompletan design sistem<br>(stil vodič + biblioteka UI komponenti)</li>
-                        <li>Interaktivni prototip spreman za testiranje sa korisnicima</li>
-                        <li>Konsultacije sa frontend programerom</li>
-                        <li>3+ rundi izmena</li>
-                    </ul>
-                    <div class="pricing-footer">
-                        <p class="pricing-price">od 1000 €</p>
-                        <p class="pricing-timeline">Rok: 2-3 nedelje (u zavisnosti od obima projekta)<br>Kompletan UX/UI • Prototipi i testiranje • Brend prezentacije</p>
-                        <button class="pricing-button">Zatraži Ponudu</button>
-                    </div>
-                </div>
+                <h2 class="section-title">UI/UX Dizajn Za Web I Mobilne Aplikacije</h2>
+                <p class="section-subtitle">Wireframe, prototipi i dizajn sistema - od ideje do prototipa</p>
             </div>
 
-            <!-- Additional Services -->
-            <div style="margin-top: 4rem;">
-                <h3 style="text-align: center; font-size: 24px; line-height: 32px; color: #fff; margin-bottom: 2rem;">Dodatne Usluge</h3>
-                <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <!-- UI/UX Tab -->
+            <div class="tab-content active" id="uiux">
+                <div class="pricing-grid">
                     <div class="pricing-card">
-                        <h4 style="font-size: 20px; line-height: 28px; color: #fff; margin-bottom: 1rem;">Dizajn Za Tvoj Biznis</h4>
-                        <ul class="pricing-features">
-                            <li>Korisničko istraživanje (ankete, intervjui sa korisnicima)</li>
-                            <li>Kompletni korisnički tokovi</li>
-                            <li>Low-fidelity / High-fidelity wireframes</li>
-                            <li>User testing i iteracije</li>
-                            <li>Card sorting / OOUX mapiranje</li>
-                            <li>Analiza konkurencije i market research</li>
-                        </ul>
+                        <h3 class="pricing-title">Starter</h3>
+                        <p class="pricing-subtitle">Za lične brendove i jednostavne sajtove</p>
+                        <div class="pricing-body">
+                            <p>UX konsultacije (do 1h)</p>
+                            <p>1 korisnički tok</p>
+                            <p>UI dizajn za 1-2 stranice<br><span class="caption">(high-fidelity dizajn; low-fidelity wireframe na zahtev)</span></p>
+                            <p>1 runda izmena</p>
+                        </div>
+                        <div class="pricing-divider"></div>
                         <div class="pricing-footer">
+                            <p class="pricing-price">od 150 €</p>
+                            <p class="pricing-timeline">Rok: 3-5 radnih dana</p>
+                            <p class="pricing-examples">Portfolija • Instagram prodavnice • Landing stranice</p>
                             <button class="pricing-button">Zatraži Ponudu</button>
                         </div>
                     </div>
+
                     <div class="pricing-card">
-                        <h4 style="font-size: 20px; line-height: 28px; color: #fff; margin-bottom: 1rem;">Dodatne Usluge</h4>
-                        <ul class="pricing-features">
-                            <li>Landing page dizajn</li>
-                            <li>E-mail signature dizajn</li>
-                            <li>Dizajn bannera</li>
-                            <li>Icon set dizajn</li>
-                            <li>Ilustracije</li>
-                            <li>Web animacije</li>
-                        </ul>
+                        <h3 class="pricing-title">Standard</h3>
+                        <p class="pricing-subtitle">Za male biznise i e-commerce</p>
+                        <div class="pricing-body">
+                            <p>Osnovno UX istraživanje<br><span class="caption">(ciljna grupa, ciljevi)</span></p>
+                            <p>Sitemap i korisnički tokovi</p>
+                            <p>UI dizajn do 5 ekrana<br><span class="caption">(high-fidelity dizajn; low-fidelity wireframe opciono)</span></p>
+                            <p>Osnovni design sistem<br><span class="caption">(boje, tipografija, osnovni UI elementi)</span></p>
+                            <p>Klikabilan prototip<br><span class="caption">(desktop i mobilna verzija)</span></p>
+                            <p>2 runde izmena</p>
+                        </div>
+                        <div class="pricing-divider"></div>
                         <div class="pricing-footer">
+                            <p class="pricing-price">od 450-600 €</p>
+                            <p class="pricing-timeline">Rok: 7-10 radnih dana</p>
+                            <p class="pricing-examples">Lokalne usluge • Saloni, restorani • Online prodavnice</p>
+                            <button class="pricing-button">Zatraži Ponudu</button>
+                        </div>
+                    </div>
+
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Premium</h3>
+                        <p class="pricing-subtitle">Za startape i složene digitalne proizvode</p>
+                        <div class="pricing-body">
+                            <p>Detaljno UX istraživanje<br><span class="caption">(ciljevi, problemi korisnika, analiza konkurencije)</span></p>
+                            <p>Kompleksni korisnički tokovi</p>
+                            <p>Wireframe svih ključnih ekrana<br><span class="caption">(low/high-fidelity po potrebi)</span></p>
+                            <p>UI dizajn<br><span class="caption">(desktop + mobilna verzija, u Figmi)</span></p>
+                            <p>Kompletan design sistem<br><span class="caption">(stil vodič + biblioteka UI komponenti)</span></p>
+                            <p>Interaktivni prototip spreman za testiranje sa korisnicima</p>
+                            <p>Konsultacije sa frontend programerom</p>
+                            <p>3+ rundi izmena</p>
+                        </div>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-footer">
+                            <p class="pricing-price">od 1000 €</p>
+                            <p class="pricing-timeline">Rok: 2-3 nedelje (u zavisnosti od obima projekta)</p>
+                            <p class="pricing-examples">Kompletan UX/UI • Prototipi i testiranje • Brend prezentacije</p>
                             <button class="pricing-button">Zatraži Ponudu</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Graphic Design Tab Content -->
-        <div class="tab-content" id="graphic">
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3 class="pricing-title">Logo I Brend Identitet</h3>
-                    <p class="pricing-subtitle">Sve Na Jednom Mestu</p>
-                    <ul class="pricing-features">
-                        <li>Logotip (2 predloga) - od 150 €</li>
-                        <li>Logotip (4 predloga) - od 190 €</li>
-                        <li>Logotip (ilustracija) - od 220 €</li>
-                        <li>Brend paket (logo + vizit karta + memorandum) - od 200 €</li>
-                        <li>Basic knjiga standarda (do 10 elemenata) - od 250 €</li>
-                        <li>Zaštitni lik brenda (maskota) - od 50 €/kom</li>
-                        <li>Vizit karta - od 30 €/kom</li>
-                        <li>Memorandum - od 30 €/kom</li>
-                    </ul>
-                    <div class="pricing-footer">
-                        <button class="pricing-button">Zatraži Ponudu</button>
+                <div class="pricing-grid two-col">
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Dizajn Za Tvoju Delatnost</h3>
+                        <p class="pricing-subtitle">Za male biznise, online prodavnice, salone, frilensere i startape</p>
+                        <div class="pricing-body">
+                            <p>E-commerce / Shopify / Etsy</p>
+                            <p>Lokalni biznisi / saloni / restorani</p>
+                            <p>Freelanceri i kreativne usluge</p>
+                            <p>Portfolio prezentacije</p>
+                            <p>Startup ideje / MVP dizajn</p>
+                        </div>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-footer">
+                            <p class="pricing-examples">Bez obzira iz koje oblasti dolazite, naši paketi su osmišljeni tako da se prilagode vašim potrebama i ciljevima</p>
+                            <button class="pricing-button">Zatraži Ponudu</button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="pricing-card">
-                    <h3 class="pricing-title">Promotivni Materijal</h3>
-                    <ul class="pricing-features">
-                        <li>Flajer - od 120 €</li>
-                        <li>Brošure/katalozi - od 20 €/str</li>
-                        <li>Cenovnici/jelovnici/karte pića - od 20 €/str</li>
-                        <li>Liflet (3 savijanja) - od 20 €/kom</li>
-                        <li>Liflet (4 savijanja) - od 80 €/kom</li>
-                        <li>Korice za knjige/časopise - od 30 €/kom</li>
-                        <li>Dizajn obrazaca - od 80 €/str</li>
-                        <li>Ulaznice - od 20 €/kom</li>
-                        <li>Potpis za email - od 25 €/kom</li>
-                    </ul>
-                    <div class="pricing-footer">
-                        <button class="pricing-button">Zatraži Ponudu</button>
-                    </div>
-                </div>
-
-                <div class="pricing-card">
-                    <h3 class="pricing-title">Brendiranje Proizvoda I Prostora</h3>
-                    <ul class="pricing-features">
-                        <li>Brendiranje izloga (do 5 segmenata) - od 100 €</li>
-                        <li>Brendiranje vozila - od 60 €</li>
-                        <li>Brendiranje uniformi - od 60 €</li>
-                        <li>Dizajn ambalaže (na upit) - od 85 €/kom</li>
-                        <li>Flaše (1 strana) - od 50 €/kom</li>
-                        <li>Flaše (2 strane) - od 80 €/kom</li>
-                        <li>Merch (šolje, majice, etikete, itd. priprema + mockup) - od 60 €/kom</li>
-                        <li>Izmena cenovnika/jelovnika - od 8 €/str</li>
-                    </ul>
-                    <div class="pricing-footer">
-                        <button class="pricing-button">Zatraži Ponudu</button>
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Dodatne Usluge</h3>
+                        <div class="pricing-body">
+                            <p>Dizajn mobilne aplikacije (iOS / Android)</p>
+                            <p class="pricing-price">od 500 €</p>
+                            <p style="margin-top: 16px;">Dizajn landing stranice</p>
+                            <p class="pricing-price">od 200 €</p>
+                            <p style="margin-top: 16px;">Redizajn postojećeg sajta ili aplikacije</p>
+                            <p class="pricing-price">po dogovoru</p>
+                            <p style="margin-top: 16px;">Testiranje sa korisnicima (user testing)</p>
+                            <p class="pricing-price">od 150 €</p>
+                            <p style="margin-top: 16px;">Izrada design systema za postojeći brend</p>
+                            <p class="pricing-price">od 300 €</p>
+                        </div>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-footer">
+                            <p class="pricing-examples">Napomena: Landing stranice se tretiraju kao posebna usluga zbog svog strateškog značaja i nisu deo standardnih paketa</p>
+                            <button class="pricing-button">Pošalji Poruku</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Mobile: Accordion -->
-            <div class="accordion">
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        Logo I Brend Identitet
-                        <i class="fas fa-chevron-down accordion-icon"></i>
+            <!-- Graphic Design Tab -->
+            <div class="tab-content" id="graphic">
+                <div class="section-header" style="margin-bottom: 40px;">
+                    <h2 class="section-title">Logo i brend identitet — sve na jednom mestu</h2>
+                    <p class="section-subtitle">Vizuelni sistemi, tipografija, palete boja i priručnici brenda</p>
+                </div>
+
+                <!-- Desktop Cards -->
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Logo i Brend Identitet</h3>
+                        <div class="pricing-body" style="text-align: left;">
+                            <div class="service-row">
+                                <span class="service-name">Logotip (2 predloga)</span>
+                                <span class="service-price">od 150 €</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Logotip (4 predloga)</span>
+                                <span class="service-price">od 190 €</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Logotip (ilustracija)</span>
+                                <span class="service-price">od 220 €</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Brend paket<br><span class="caption">(logo + vizit karta + memorandum)</span></span>
+                                <span class="service-price">od 200 €</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Basic knjiga standarda<br><span class="caption">(do 10 elemenata)</span></span>
+                                <span class="service-price">od 250 €</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Zaštitni lik brenda<br><span class="caption">(maskota)</span></span>
+                                <span class="service-price">od 50 €/kom</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Vizit karta</span>
+                                <span class="service-price">od 30 €/kom<br><span class="service-note">(naredne u istom dizajnu +10 €)</span></span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Memorandum</span>
+                                <span class="service-price">od 30 €/kom</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Pečat</span>
+                                <span class="service-price">od 30 €<br><span class="service-note">(svako naredno rešenje +10 €)</span></span>
+                            </div>
+                        </div>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-footer">
+                            <button class="pricing-button">Zatraži Ponudu</button>
+                        </div>
                     </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul>
-                                <li><span class="service-name">Logotip (2 predloga)</span> <span class="service-price">od 150 €</span></li>
-                                <li><span class="service-name">Logotip (4 predloga)</span> <span class="service-price">od 190 €</span></li>
-                                <li><span class="service-name">Logotip (ilustracija)</span> <span class="service-price">od 220 €</span></li>
-                                <li><span class="service-name">Brend paket</span> <span class="service-price">od 200 €</span></li>
-                                <li><span class="service-name">Basic knjiga standarda</span> <span class="service-price">od 250 €</span></li>
-                                <li><span class="service-name">Zaštitni lik brenda</span> <span class="service-price">od 50 €/kom</span></li>
-                                <li><span class="service-name">Vizit karta</span> <span class="service-price">od 30 €/kom</span></li>
-                                <li><span class="service-name">Memorandum</span> <span class="service-price">od 30 €/kom</span></li>
-                            </ul>
-                            <button class="pricing-button" style="margin-top: 1rem;">Zatraži Ponudu</button>
+
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Promotivni Materijal</h3>
+                        <div class="pricing-body" style="text-align: left;">
+                            <div class="service-row">
+                                <span class="service-name">Flajer</span>
+                                <span class="service-price">od 120 €</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Brošure/katalozi</span>
+                                <span class="service-price">od 20 €/str</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Cenovnici/jelovnici/karte pića</span>
+                                <span class="service-price">od 20 €/str</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Liflet<br><span class="caption">(3 savijanja)</span></span>
+                                <span class="service-price">od 20 €/kom</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Liflet<br><span class="caption">(4 savijanja)</span></span>
+                                <span class="service-price">od 80 €/kom</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Korice za knjige/časopise</span>
+                                <span class="service-price">od 30 €/kom</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Dizajn obrazaca</span>
+                                <span class="service-price">od 80 €/str</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Ulaznice</span>
+                                <span class="service-price">od 20 €/kom</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Potpis za email</span>
+                                <span class="service-price">od 25 €/kom</span>
+                            </div>
+                        </div>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-footer">
+                            <button class="pricing-button">Zatraži Ponudu</button>
+                        </div>
+                    </div>
+
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Brendiranje Proizvoda i Prostora</h3>
+                        <div class="pricing-body" style="text-align: left;">
+                            <div class="service-row">
+                                <span class="service-name">Brendiranje izloga<br><span class="caption">(do 5 segmenata)</span></span>
+                                <span class="service-price">od 100 €</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Brendiranje vozila</span>
+                                <span class="service-price">od 60 €</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Brendiranje uniformi</span>
+                                <span class="service-price">od 60 €</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Dizajn ambalaže</span>
+                                <span class="service-price">od 85 €/kom<br><span class="service-note">(na upit)</span></span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Flaše<br><span class="caption">(1 strana)</span></span>
+                                <span class="service-price">od 50 €/kom</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Flaše<br><span class="caption">(2 strane)</span></span>
+                                <span class="service-price">od 80 €/kom</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Merch<br><span class="caption">(šolje, majice, etikete, itd. priprema + mockup)</span></span>
+                                <span class="service-price">od 60 €/kom</span>
+                            </div>
+                            <div class="service-row">
+                                <span class="service-name">Izmena cenovnika/jelovnika</span>
+                                <span class="service-price">od 8 €/str</span>
+                            </div>
+                        </div>
+                        <div class="pricing-divider"></div>
+                        <div class="pricing-footer">
+                            <button class="pricing-button">Zatraži Ponudu</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        Promotivni Materijal
-                        <i class="fas fa-chevron-down accordion-icon"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul>
-                                <li><span class="service-name">Flajer</span> <span class="service-price">od 120 €</span></li>
-                                <li><span class="service-name">Brošure/katalozi</span> <span class="service-price">od 20 €/str</span></li>
-                                <li><span class="service-name">Cenovnici/jelovnici/karte pića</span> <span class="service-price">od 20 €/str</span></li>
-                                <li><span class="service-name">Liflet (3 savijanja)</span> <span class="service-price">od 20 €/kom</span></li>
-                                <li><span class="service-name">Liflet (4 savijanja)</span> <span class="service-price">od 80 €/kom</span></li>
-                                <li><span class="service-name">Korice za knjige/časopise</span> <span class="service-price">od 30 €/kom</span></li>
-                                <li><span class="service-name">Dizajn obrazaca</span> <span class="service-price">od 80 €/str</span></li>
-                                <li><span class="service-name">Ulaznice</span> <span class="service-price">od 20 €/kom</span></li>
-                                <li><span class="service-name">Potpis za email</span> <span class="service-price">od 25 €/kom</span></li>
-                            </ul>
-                            <button class="pricing-button" style="margin-top: 1rem;">Zatraži Ponudu</button>
+                <!-- Mobile Accordions -->
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            Logo i Brend Identitet
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div class="service-row">
+                                    <span class="service-name">Logotip (2 predloga)</span>
+                                    <span class="service-price">od 150 €</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Logotip (4 predloga)</span>
+                                    <span class="service-price">od 190 €</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Logotip (ilustracija)</span>
+                                    <span class="service-price">od 220 €</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Brend paket</span>
+                                    <span class="service-price">od 200 €</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Basic knjiga standarda</span>
+                                    <span class="service-price">od 250 €</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Zaštitni lik brenda</span>
+                                    <span class="service-price">od 50 €/kom</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Vizit karta</span>
+                                    <div>
+                                        <span class="service-price">od 30 €/kom</span>
+                                        <div class="service-note">(naredne u istom dizajnu +10 €)</div>
+                                    </div>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Memorandum</span>
+                                    <span class="service-price">od 30 €/kom</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Pečat</span>
+                                    <div>
+                                        <span class="service-price">od 30 €</span>
+                                        <div class="service-note">(svako naredno rešenje +10 €)</div>
+                                    </div>
+                                </div>
+                                <button class="pricing-button" style="margin-top: 20px;">Zatraži Ponudu</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        Brendiranje Proizvoda I Prostora
-                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            Promotivni Materijal
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div class="service-row">
+                                    <span class="service-name">Flajer</span>
+                                    <span class="service-price">od 120 €</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Brošure/katalozi</span>
+                                    <span class="service-price">od 20 €/str</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Cenovnici/jelovnici/karte pića</span>
+                                    <span class="service-price">od 20 €/str</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Liflet (3 savijanja)</span>
+                                    <span class="service-price">od 20 €/kom</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Liflet (4 savijanja)</span>
+                                    <span class="service-price">od 80 €/kom</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Korice za knjige/časopise</span>
+                                    <span class="service-price">od 30 €/kom</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Dizajn obrazaca</span>
+                                    <span class="service-price">od 80 €/str</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Ulaznice</span>
+                                    <span class="service-price">od 20 €/kom</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Potpis za email</span>
+                                    <span class="service-price">od 25 €/kom</span>
+                                </div>
+                                <button class="pricing-button" style="margin-top: 20px;">Zatraži Ponudu</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="accordion-content">
-                        <div class="accordion-body">
-                            <ul>
-                                <li><span class="service-name">Brendiranje izloga</span> <span class="service-price">od 100 €</span></li>
-                                <li><span class="service-name">Brendiranje vozila</span> <span class="service-price">od 60 €</span></li>
-                                <li><span class="service-name">Brendiranje uniformi</span> <span class="service-price">od 60 €</span></li>
-                                <li><span class="service-name">Dizajn ambalaže</span> <span class="service-price">od 85 €/kom</span></li>
-                                <li><span class="service-name">Flaše (1 strana)</span> <span class="service-price">od 50 €/kom</span></li>
-                                <li><span class="service-name">Flaše (2 strane)</span> <span class="service-price">od 80 €/kom</span></li>
-                                <li><span class="service-name">Merch (šolje, majice, etikete)</span> <span class="service-price">od 60 €/kom</span></li>
-                                <li><span class="service-name">Izmena cenovnika/jelovnika</span> <span class="service-price">od 8 €/str</span></li>
-                            </ul>
-                            <button class="pricing-button" style="margin-top: 1rem;">Zatraži Ponudu</button>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            Brendiranje Proizvoda i Prostora
+                            <i class="fas fa-chevron-down accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div class="service-row">
+                                    <span class="service-name">Brendiranje izloga</span>
+                                    <span class="service-price">od 100 €</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Brendiranje vozila</span>
+                                    <span class="service-price">od 60 €</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Brendiranje uniformi</span>
+                                    <span class="service-price">od 60 €</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Dizajn ambalaže</span>
+                                    <div>
+                                        <span class="service-price">od 85 €/kom</span>
+                                        <div class="service-note">(na upit)</div>
+                                    </div>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Flaše (1 strana)</span>
+                                    <span class="service-price">od 50 €/kom</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Flaše (2 strane)</span>
+                                    <span class="service-price">od 80 €/kom</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Merch (šolje, majice, etikete)</span>
+                                    <span class="service-price">od 60 €/kom</span>
+                                </div>
+                                <div class="service-row">
+                                    <span class="service-name">Izmena cenovnika/jelovnika</span>
+                                    <span class="service-price">od 8 €/str</span>
+                                </div>
+                                <button class="pricing-button" style="margin-top: 20px;">Zatraži Ponudu</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1111,48 +1379,49 @@
 
     <!-- Portfolio Section -->
     <section class="portfolio" id="portfolio">
-        <div class="section-header">
-            <h2 class="section-title">Naš Rad Je Način Razmišljanja</h2>
-            <p class="section-subtitle">Dizajn kao odgovor na potrebe korisnika i poslovnih ciljeva</p>
-        </div>
-        <div class="portfolio-grid">
-            <div class="portfolio-item">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Naš Rad Je Način Razmišljanja</h2>
+                <p class="section-subtitle">Dizajn kao odgovor na potrebe korisnika i poslovnih ciljeva</p>
+            </div>
+
+            <div class="portfolio-block">
                 <div class="portfolio-image">
-                    <img src="assets/Traveweb.png" alt="Strategic Web Design">
+                    <img src="assets/Block01.png" alt="Strateški web dizajn">
                 </div>
-                <div class="portfolio-info">
+                <div class="portfolio-content">
                     <h3>Strateški web dizajn</h3>
-                    <p>Fokus. Kada gledaš na stil ovako dovršeno kao što je u ovom primeru, ono što ostaje je upravo ta kombinacija funkcionalnosti i estetike. Sve počinje sa pažnjom prema svim elementima korisničkog iskustva.</p>
+                    <p>Za nas, dizajn sajta nije samo estetika, već strateški alat. Svaka stranica je pažljivo koncipirana da vodi korisnika kroz iskustvo, uz balans između vizuelne privlačnosti i funkcionalnosti.</p>
                 </div>
             </div>
 
-            <div class="portfolio-item">
+            <div class="portfolio-block">
                 <div class="portfolio-image">
-                    <img src="assets/VRweb.png" alt="Intuitive Mobile Apps">
+                    <img src="assets/Block02.png" alt="Intuitivne mobilne aplikacije">
                 </div>
-                <div class="portfolio-info">
+                <div class="portfolio-content">
                     <h3>Intuitivne mobilne aplikacije</h3>
-                    <p>Svaka akcija za korisnika treba da bude jasna i intuitivna. Dizajniramo aplikacije sa fokusom na jednostavnost i brzinu korišćenja, uz vizuelni identitet koji odgovara vašem brendu.</p>
+                    <p>Kada dizajniramo aplikacije, polazimo od potreba korisnika. Jasna tipografija, čitljive boje i logičan raspored elemenata čine iskustvo intuitivnim i prijatnim.</p>
                 </div>
             </div>
 
-            <div class="portfolio-item">
+            <div class="portfolio-block">
                 <div class="portfolio-image">
-                    <img src="assets/Bankingapp.jpg" alt="Memorable Identity">
+                    <img src="assets/Block03.png" alt="Identitet koji se pamti">
                 </div>
-                <div class="portfolio-info">
+                <div class="portfolio-content">
                     <h3>Identitet koji se pamti</h3>
-                    <p>Brend je poput otiska prsta — treba da bude jedinstven, nezaboravan i trenutno prepoznatljiv. Kreiramo vizuelne identitete koji ostavljaju nezaboravan prvi utisak i grade trajne veze.</p>
+                    <p>Brend nije samo logo — to je emocija. Boje, tipografija i vizuelni jezik zajedno grade identitet koji publika pamti i prepoznaje.</p>
                 </div>
             </div>
 
-            <div class="portfolio-item">
+            <div class="portfolio-block">
                 <div class="portfolio-image">
-                    <img src="assets/Bojanabarlogo.png" alt="Clear Message">
+                    <img src="assets/Block04.png" alt="Logo sa jasnom porukom">
                 </div>
-                <div class="portfolio-info">
+                <div class="portfolio-content">
                     <h3>Logo sa jasnom porukom</h3>
-                    <p>Logo nije samo znak — to je priča ispričana na prvi pogled. Naš pristup balansira jednostavnost sa karakterom, osiguravajući da vaš logo nije samo viđen, već i osećen i shvaćen.</p>
+                    <p>Logo je prvi kontakt sa brendom. Zato ga oblikujemo tako da bude jednostavan, prepoznatljiv i dugovečan, dok u isto vreme nosi priču i vrednosti koje zastupa.</p>
                 </div>
             </div>
         </div>
@@ -1160,49 +1429,54 @@
 
     <!-- About Section -->
     <section class="about" id="about">
-        <div class="section-header">
-            <h2 class="section-title">O Nama</h2>
-            <p class="section-subtitle">Dizajniramo jasne i intuitivne interfejse — od ideje do gotovog rešenja</p>
-        </div>
-        <div class="about-content">
-            <p>Horizon Studio je dizajn studio fokusiran na jasnoću, funkcionalnost i vizuelnu dosljednost.</p>
-            <p>Radimo direktno sa klijentima kako bismo razumeli njihov cilj, identitet i potrebe publike. Sve što razvijamo — od UI/UX riješenja do brand materijala — nastaje kroz istraživanje, strategiju i niz testiranja.</p>
-            <p>Ne dizajniramo šemu kako bi izgledalo atraktivno. Svaki element ima razlog. Dizajn je alat za jasnoću, ne samo vizuelnu privlačnost. Mi vjerujemo u mjerljivu vrijednost — rad treba da poboljšava iskustvo, olakšava procese i gradi snažan identitet koji se zapaža.</p>
-            <p>Bez šablona. Bez naslova zarad naslova. Samo direktan rad i precizna isporuka.</p>
+        <div class="container">
+            <div class="about-content">
+                <div class="section-header">
+                    <h2 class="section-title">O Nama</h2>
+                    <p class="section-subtitle">Dizajniramo jasna i autentična rešenja – od ideje do korisničkog iskustva</p>
+                </div>
+                <div class="about-text">
+                    <p><strong>Horizon Studio je kreativni prostor posvećen vizuelnoj jasnoći i estetskoj doslednosti.</strong> Bilo da je u pitanju UI/UX dizajn, brendiranje ili promotivni materijali, svakom projektu pristupamo istraživački – tako da rezultat ima smisao, svrhu i merljiv efekat.</p>
+                    <p>Nastali smo iz potrebe da spojimo dve tačke: dizajn koji izgleda dobro i dizajn koji funkcioniše odlično. Verujemo da uspešan vizuelni identitet ne počinje bojom ili fontom, već pitanjima. Zato slušamo, analiziramo i pitamo „zašto" pre nego što kažemo „kako".</p>
+                    <p>Naš cilj je jednostavan: da svaka ideja dobije jasan, funkcionalan i autentičan oblik.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <div class="section-header">
-            <h2 class="section-title">Imate Pitanje?</h2>
-            <p class="section-subtitle">Pošaljite nam poruku, uvek ćemo da se javimo</p>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Imate Pitanje?</h2>
+                <p class="section-subtitle">Pišite nam, tu smo da pomognemo</p>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Ime</label>
+                    <input type="text" id="name" name="name" placeholder="Unesite vaše ime" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Unesite vašu email adresu" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Poruka</label>
+                    <textarea id="message" name="message" placeholder="Vaša poruka" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Pošalji Poruku</button>
+            </form>
         </div>
-        <form class="contact-form">
-            <div class="form-group">
-                <label for="name">Ime</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Poruka</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit" class="submit-button">Pošalji Poruku</button>
-        </form>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-about">
-                <div class="logo">
+            <div class="footer-left">
+                <div class="footer-logo">
                     <img src="assets/Logo.svg" alt="Horizon Studio">
                 </div>
-                <p>Horizon Studio je dizajn studio fokusiran na jasnoću, funkcionalnost i vizuelnu dosljednost.</p>
+                <p class="footer-text">Horizon Studio je dizajn studio fokusiran na jasnoću, funkcionalnost i vizuelnu dosljednost.</p>
                 <div class="social-icons">
                     <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
                     <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -1210,113 +1484,64 @@
                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
-            <div class="footer-links">
-                <h4>Glavni Meni</h4>
-                <ul>
-                    <li><a href="#">Početna</a></li>
-                    <li><a href="#services">Usluge</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#about">O Nama</a></li>
-                    <li><a href="#contact">Kontakt</a></li>
-                </ul>
+            <div class="footer-middle">
+                <h4 class="footer-title">Glavni Meni</h4>
+                <div class="footer-links">
+                    <a href="#">Početna</a>
+                    <a href="#services">Usluge</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#about">O Nama</a>
+                    <a href="#contact">Kontakt</a>
+                </div>
             </div>
-            <div class="footer-contact">
-                <h4>Kontakt</h4>
-                <p>aleksandar@horizonstudio.pro</p>
-                <p>21000 Novi Sad, Srbija</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2025 Horizon Studio. Sva prava zadržana.</p>
-            <div class="footer-legal">
-                <a href="privacy.html">Politika privatnosti</a>
-                <a href="terms.html">Uslovi korišćenja</a>
-                <a href="cookies.html">Politika kolačića</a>
+            <div class="footer-right">
+                <h4 class="footer-title">Kontakt</h4>
+                <div class="footer-contact">
+                    <p>aleksandar@horizonstudio.pro</p>
+                    <p>21000 Novi Sad, Srbija</p>
+                </div>
             </div>
         </div>
     </footer>
 
+    <div class="footer-bottom">
+        <span>© 2025 Horizon Studio. Sva prava zadržana.</span>
+        <div class="footer-bottom-links">
+            <a href="privacy.html">Politika privatnosti</a>
+            <a href="terms.html">Uslovi korišćenja</a>
+            <a href="cookies.html">Politika kolačića</a>
+        </div>
+    </div>
+
     <script>
-        // Hamburger Menu Toggle
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Hamburger menu
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
 
         hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
         });
 
-        // Close menu when clicking on a link
+        // Close menu on link click
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
             });
         });
 
-        // Smooth Scroll
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Tab Switching
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-
-                button.classList.add('active');
-                const tabId = button.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-
-        // Accordion (Mobile)
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-        accordionHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const accordionItem = header.parentElement;
-                const isActive = accordionItem.classList.contains('active');
-
-                document.querySelectorAll('.accordion-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-
-                if (!isActive) {
-                    accordionItem.classList.add('active');
-                }
-            });
-        });
-
-        // Sticky Header Shadow on Scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-            } else {
-                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
-            }
-        });
-
-        // Form Submission
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Hvala na poruci! Javićemo se uskoro.');
-        });
-    </script>
-</body>
-</html>
