@@ -10,7 +10,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* ===== RESET & VARIABLES ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -176,7 +176,7 @@
         .cta-button:hover {
             background: var(--p);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px var(--sh);
+            /*box-shadow: 0 4px 12px var(--sh);*/
         }
         .hero-image img {
             width: 526px;
@@ -654,6 +654,10 @@
             max-width: 840px;
             margin: 0 auto;
         }
+        .section-header {
+        text-align: center;
+        margin-bottom: 48px;
+        }
         .about-text { margin-top: 40px; }
         .about-text p {
             font-family: 'Inter', sans-serif;
@@ -669,6 +673,10 @@
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
+        }
+        .section-header {
+        text-align: center;
+        margin-bottom: 48px;
         }
         .form-group { margin-bottom: 24px; }
         .form-group label {
@@ -764,6 +772,7 @@
             justify-content: center;
             color: var(--w);
             font-size: 20px;
+            text-decoration: none; /* Ovo uklanja underline */
             transition: color 0.3s, transform 0.3s;
         }
         .social-icons a:hover {
@@ -852,7 +861,7 @@
             width: 299px;
             height: 100vh;
             background: var(--bg);
-            z-index: 999;
+            z-index: 9999;
             display: flex;
             flex-direction: column;
             padding: 80px 32px 40px;
@@ -869,7 +878,6 @@
             flex-direction: column;
             gap: 24px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 32px 0;
         }
         .mobile-nav a {
@@ -893,7 +901,7 @@
             text-align: center;
         }
         .mobile-lang {
-            margin-top: auto;
+            margin-top: 32px;
             text-align: center;
             padding-top: 32px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -954,12 +962,15 @@
                 font-size: 20px;
                 line-height: 26px;
             }
-            .hero-image { order: -1; }
+            /*.hero-image { order: -1; } - zbog ovoga je slika bila iznat teksta i cta*/
             .hero-image img {
                 width: 343px;
                 height: 289px;
             }
-            .cta-button { display: none; }
+            .cta-button { 
+            display: inline-block;
+            margin-top: 24px; 
+            }
 
             /* Blocks Mobile */
             .blocks { padding: 32px 0; }
@@ -1860,10 +1871,18 @@
                 </div>
                 <p class="footer-text">Horizon Studio je dizajn studio fokusiran na jasnoću, funkcionalnost i vizuelnu doslednost.</p>
                 <div class="social-icons">
-                    <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://dribbble.com/MulicDesign" target="_blank" rel="noopener noreferrer" aria-label="Dribbble">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mulicdesign/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                     </a>
+                    <a href="https://www.instagram.com/horizon_studio_serbia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://x.com/SaleMulic" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
                 </div>
             </div>
             <div class="footer-center">
@@ -1926,6 +1945,17 @@
                 document.body.style.overflow = '';
             });
         });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const isClickInsideMenu = mobileOverlay.contains(e.target);
+            const isClickOnHamburger = hamburger.contains(e.target);
+
+            if (!isClickInsideMenu && !isClickOnHamburger && mobileOverlay.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
 
         // ===== SMOOTH SCROLL =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
