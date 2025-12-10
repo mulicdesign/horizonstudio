@@ -194,6 +194,18 @@
             gap: 20px;
             justify-content: center;
         }
+        /* DODAJ OVAJ MEDIA QUERY */
+        @media screen and (max-width: 770px) {
+             /* Blocks Mobile */
+            .blocks { padding: 32px 0; }
+            .blocks .container {
+                grid-template-columns: 1fr;
+                max-width: 343px;
+                gap: 24px;
+                height: auto;  /* Važno - da se ne preklapa */
+            }
+        }
+
         .block-card {
             width: 258px;
             height: 220px;
