@@ -987,7 +987,7 @@
             }
 
             /* Blocks Mobile */
-            .blocks { padding: 32px 0; }
+            .blocks { padding: 32px 0 64px 0; }
             .blocks .container {
                 grid-template-columns: 1fr;
                 max-width: 343px;
@@ -2055,7 +2055,7 @@
 
             // Set initial position
             function setPosition() {
-                track.style.transform = `translateX(${-currentIndex * cardWidth + 11}px)`;
+                track.style.transform = `translateX(${-currentIndex * cardWidth + 10.4}px)`;
                 dots.forEach((dot, i) => {
                     dot.classList.toggle('active', i === currentIndex);
                 });
