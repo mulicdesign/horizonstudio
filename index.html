@@ -980,8 +980,10 @@
                 height: 289px;
             }
             .cta-button { 
-            display: inline-block;
-            margin-top: 24px; 
+            display: block;
+            width: 343px;
+            margin-top: 24px;
+            text-align: center;
             }
 
             /* Blocks Mobile */
@@ -1118,7 +1120,7 @@
     <!-- HEADER -->
     <header class="header" id="header">
         <div class="header-content">
-            <a href="#" class="logo">
+            <a href="#hero" class="logo">
                 <img src="assets/Logo.svg" alt="Horizon Studio">
             </a>
             <ul class="nav-menu">
@@ -1143,7 +1145,9 @@
     <!-- MOBILE OVERLAY MENU -->
     <div class="mobile-overlay" id="mobileOverlay">
         <div class="mobile-logo">
-            <img src="assets/Logo.svg" alt="Horizon Studio">
+            <a href="#hero"></a>
+                <img src="assets/Logo.svg" alt="Horizon Studio">
+            </a>
         </div>
         <nav class="mobile-nav">
             <a href="#services"><i class="fas fa-paint-brush"></i> Usluge</a>
@@ -1159,7 +1163,7 @@
     </div>
 
     <!-- HERO SECTION -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="container">
             <div class="hero-content">
                 <p class="hero-tagline">Imaš ideju? Mi je pretvaramo u dizajn</p>
