@@ -2079,7 +2079,7 @@ Dugme će biti poravnato sa tekstom i slikom ispod*/
 
             // Set initial position
             function setPosition() {
-                track.style.transform = `translateX(${-currentIndex * cardWidth + 13}px)`; /*10.6 - 11 ide u desno, 10 ide u levo*/
+                track.style.transform = `translateX(${-currentIndex * cardWidth + 11}px)`; /*10.6 - 11 ide u desno, 10 ide u levo*/
                 dots.forEach((dot, i) => {
                     dot.classList.toggle('active', i === currentIndex);
                 });
