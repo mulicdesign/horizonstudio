@@ -183,6 +183,9 @@
             height: 445px;
             border-radius: 12px;
             object-fit: cover;
+            -webkit-user-select: none;
+            user-select: none;
+            pointer-events: none;
         }
 
         /* ===== BLOCKS SECTION ===== */
@@ -214,6 +217,9 @@
             border-radius: 8px;
             transition: all 0.3s;
             border: 1px solid transparent;
+            -webkit-user-select: none;  /* Safari */
+            user-select: none;          /* Onemogućava selekciju teksta */
+            -webkit-tap-highlight-color: transparent;  /* Uklanja plavi highlight na tap */
         }
         .block-card:hover {
             border-color: var(--cy);
@@ -343,6 +349,8 @@
             line-height: 14px;
             color: var(--w);
             opacity: 0.8;
+            display: block;           /* ← DODAJ */
+            margin-top: 0px;         /* ← DODAJ (približava caption gore) */
         }
         .pricing-divider {
             height: 0.5px;
@@ -407,12 +415,12 @@
         .industry-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;  /* Veći razmaci između redova */
+            gap: 10px;  /* Veći razmaci između redova */
         }
         .industry-list p {
            font-family: 'Inter', sans-serif;
             font-size: 16px;  /* Ista veličina kao u dodatnim uslugama */
-          line-height: 24px;
+          line-height: 22px;
           font-weight: 400;
           color: var(--w);
           margin-bottom: 0;  /* Uklanjamo margin jer koristimo gap */
@@ -638,6 +646,9 @@
             border-radius: 12px;
             object-fit: cover;
             transition: transform 0.3s;
+            -webkit-user-select: none;
+            user-select: none;
+            pointer-events: none;  /* Sprečava long-press meni za slike */
         }
         .portfolio-image:hover img {
             transform: scale(1.05);
@@ -1352,11 +1363,11 @@ Dugme će biti poravnato sa tekstom i slikom ispod*/
                             <p class="pricing-subtitle">Za male biznise, online prodavnice, salone, frilensere i startape</p>
                         </div>
                         <div class="pricing-body industry-list">
-                            <p>E-commerce / Shopify / Etsy</p>
-                            <p>Lokalni biznisi / saloni / restorani</p>
-                            <p>Freelanceri i kreativne usluge</p>
-                            <p>Portfolio prezentacije</p>
-                            <p>Startup ideje / MVP dizajn</p>
+                            <p>E-commerce & Online prodavnice<br><span class="caption">(Shopify, WooCommerce i custom rešenja)</span></p>
+                            <p>Amazon & Marketplace vizuali<br><span class="caption">(A+ content, listing vizuali, infografike)</span></p>
+                            <p>Vizuelni materijali za oglase i društvene mreže<br><span class="caption">Vizuali i promotivni materijali</span></p>
+                            <p>Lokalni biznisi<br><span class="caption">(Saloni, restorani i uslužne delatnosti)</span></p>
+                            <p>Design support / Kontinuirana saradnja</p>
                         </div>
                         <div class="pricing-divider"></div>
                         <div class="pricing-footer">
@@ -1479,11 +1490,11 @@ Dugme će biti poravnato sa tekstom i slikom ispod*/
                                 <p class="pricing-subtitle">Za male biznise, online prodavnice, salone</p>
                             </div>
                             <div class="pricing-body">
-                                <p>E-commerce / Shopify / Etsy</p>
-                                <p>Lokalni biznisi / saloni / restorani</p>
-                                <p>Freelanceri i kreativne usluge</p>
-                                <p>Portfolio prezentacije</p>
-                                <p>Startup ideje / MVP dizajn</p>
+                                <p>E-commerce & Online prodavnice<br><span class="caption">(Shopify, WooCommerce i custom rešenja)</span></p>
+                                <p>Amazon & Marketplace vizuali<br><span class="caption">(A+ content, listing vizuali, infografike)</span></p>
+                                <p>Vizuali, baneri i modularni asseti</p>
+                                <p>Lokalni biznisi<br><span class="caption">(Saloni, restorani i uslužne delatnosti)</span></p>
+                                <p>Dizajn podrška po potrebi</p>
                             </div>
                             <div class="pricing-divider"></div>
                             <div class="pricing-footer">
