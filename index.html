@@ -981,13 +981,16 @@
             }
             .cta-button { 
             display: block;
-            width: 343px;
-            margin-top: 24px;
-            text-align: center;
-            }
+            width: 100%;
+            max-width: 343px;
+            margin: 24px auto 0;
+            text-align: center; 
+            } /*Vraćamo display: inline-block;
+width: 100%; će uzeti punu širinu hero-content containera (koji ima padding)
+Dugme će biti poravnato sa tekstom i slikom ispod*/
 
             /* Blocks Mobile */
-            .blocks { padding: 32px 0 64px 0; }
+            .blocks { padding: 32px 0 64px 0; } /*padding: 32px 0 64px 0; = gornji 32px, donji 64px*/
             .blocks .container {
                 grid-template-columns: 1fr;
                 max-width: 343px;
@@ -1033,7 +1036,8 @@
 
             /* Portfolio Mobile */
             .portfolio { padding: 32px 0; }
-            .portfolio .container { max-width: 343px; }
+            .portfolio .container { max-width: 343px; margin: 0 auto; /* DODAJ */
+                padding: 0 20px; /* DODAJ */}
             .portfolio-grid { gap: 32px; margin-top: 32px; }
             .portfolio-block,
             .portfolio-block:nth-child(even) {
@@ -1042,11 +1046,18 @@
             }
             .portfolio-block .portfolio-image,
             .portfolio-block:nth-child(even) .portfolio-image {
-                order: 0;
+                order: 0; width: 100%; /* DODAJ */
+            }
+            .portfolio-image {
+                width: 100%; /* DODAJ */
+                overflow: hidden; /* DODAJ */
             }
             .portfolio-image img {
-                width: 343px;
+                width: 100%; /* PROMENI sa 343px */
+                max-width: 343px; /* DODAJ */
                 height: auto;
+                display: block; /* DODAJ */
+                margin: 0 auto; /* DODAJ */
             }
             .portfolio-content h3 {
                 font-size: 20px;
@@ -1845,7 +1856,8 @@
                     <p class="section-subtitle">Dizajniramo jasna i autentična rešenja – od ideje do korisničkog iskustva</p>
                 </div>
                 <div class="about-text">
-                    <p><strong>Horizon Studio je kreativni prostor posvećen vizuelnoj jasnoći i estetskoj doslednosti.</strong> Bilo da je u pitanju UI/UX dizajn, brendiranje ili promotivni materijali, svakom projektu pristupamo istraživački – tako da rezultat ima smisao, svrhu i merljiv efekat.</p>
+                    <p><strong>Horizon Studio je kreativni prostor posvećen vizuelnoj jasnoći i estetskoj doslednosti.</strong></p>
+                    <p>Bilo da je u pitanju UI/UX dizajn, brendiranje ili promotivni materijali, svakom projektu pristupamo istraživački – tako da rezultat ima smisao, svrhu i merljiv efekat.</p>
                     <p>Nastali smo iz potrebe da spojimo dve tačke: dizajn koji izgleda dobro i dizajn koji funkcioniše odlično. Verujemo da uspešan vizuelni identitet ne počinje bojom ili fontom, već pitanjima. Zato slušamo, analiziramo i pitamo „zašto" pre nego što kažemo „kako".</p>
                     <p>Naš cilj je jednostavan: da svaka ideja dobije jasan, funkcionalan i autentičan oblik.</p>
                 </div>
@@ -2055,7 +2067,7 @@
 
             // Set initial position
             function setPosition() {
-                track.style.transform = `translateX(${-currentIndex * cardWidth + 10.4}px)`;
+                track.style.transform = `translateX(${-currentIndex * cardWidth + 10.6}px)`; /*10.6 - 11 ide u desno, 10 ide u levo*/
                 dots.forEach((dot, i) => {
                     dot.classList.toggle('active', i === currentIndex);
                 });
