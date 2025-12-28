@@ -994,12 +994,24 @@ Dugme će biti poravnato sa tekstom i slikom ispod*/
             .blocks .container {
                 grid-template-columns: 1fr;
                 max-width: 343px;
-                gap: 24px;
+                gap: 44px;
             }
             .block-card {
                 width: 267px;
-                height: 144px;
+                height: 200px;
                 margin: 0 auto;
+                padding: 24px 16px 32px 16px;
+            }
+            .block-card:hover {
+                border-color: transparent;
+                box-shadow: none;
+                transform: none;
+            }
+
+            .block-card:active {
+                border-color: var(--cy);
+                box-shadow: 0 4px 15px var(--sh);
+                transform: scale(0.98);
             }
             .block-desc {
                 font-size: 14px;
