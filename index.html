@@ -1136,7 +1136,37 @@ Dugme će biti poravnato sa tekstom i slikom ispod*/
                 line-height: 20px;
             }
         }
-
+            /* ===== FIX ZA STICKY HOVER NA MOBILNIM UREĐAJIMA ===== */
+        @media (hover: none) and (pointer: coarse) {
+            /* Navigation linkovi - glavno + mobilno + footer */
+            .nav-menu a:hover,
+            .mobile-nav a:hover,
+            .footer-links a:hover,
+            .footer-bottom-links a:hover,
+            .lang-switch a:hover,
+            .mobile-lang a:hover {
+                color: var(--w);
+            }
+    
+                /* Vizuelni feedback samo dok se drži */
+            .nav-menu a:active,
+            .mobile-nav a:active,
+            .footer-links a:active,
+            .footer-bottom-links a:active {
+                color: var(--cy);
+            }
+    
+                /* Social ikonice */
+            .social-icons a:hover {
+                color: var(--w);
+                transform: none;
+            }
+    
+            .social-icons a:active {
+                color: var(--cy);
+                transform: translateY(-2px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -1928,7 +1958,7 @@ Dugme će biti poravnato sa tekstom i slikom ispod*/
             <div class="footer-center">
                 <h4 class="footer-title">Glavni Meni</h4>
                 <div class="footer-links">
-                    <a href="#">Početna</a>
+                    <a href="#hero">Početna</a>
                     <a href="#services">Usluge</a>
                     <a href="#portfolio">Portfolio</a>
                     <a href="#about">O Nama</a>
