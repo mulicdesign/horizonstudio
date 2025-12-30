@@ -686,6 +686,13 @@
             color: var(--w);
             margin-bottom: 16px;
         }
+        /* DODAJEŠ OVDE - Desktop/Mobile switch */
+        .about-text-desktop {
+            display: block; /* Prikazuje se na desktop-u */
+        }
+        .about-text-mobile {
+            display: none; /* Skriva se na desktop-u */
+        }
 
         /* ===== CONTACT SECTION ===== */
         .contact { padding: 80px 0; }
@@ -1094,6 +1101,13 @@
                 font-weight: 400;
             }
             .about-text { margin-top: 24px; }
+
+            .about-text-desktop {
+                display: none; /* Skriva se na mobilnom */
+            }
+            .about-text-mobile {
+                display: block; /* Prikazuje se na mobilnom */
+            }            
 
             /* Contact Mobile */
             .contact { padding: 32px 0; }
@@ -1897,11 +1911,15 @@
                     <h2 class="section-title">About Us</h2>
                     <p class="section-subtitle">We design clear, authentic solutions – from concept to user experience</p>
                 </div>
-                <div class="about-text">
+                <div class="about-text about-text-desktop">
                     <p><strong>Horizon Studio is a creative space dedicated to visual clarity and consistent aesthetics.</strong></p>
                     <p>From UI/UX design and branding to promotional materials, we approach every project through research—so the outcome has purpose, meaning, and measurable impact.</p>
                     <p>We exist to unite two points: design that looks good and design that works great. We believe a strong visual identity doesn't start with a color or a font—it starts with questions. That's why we listen, analyze, and ask "why" before we say "how."</p>
                     <p>Our goal is simple: to give every idea a clear, functional, and authentic form.</p>
+                </div>
+                <div class="about-text about-text-mobile">
+                    <p>Horizon Studio is where design has both purpose and style. Every project starts with listening and analysis—because good results are not only beautiful, but also functional.</p>
+                    <p>We connect aesthetics with logic so every idea becomes clear and authentic form.</p>
                 </div>
             </div>
         </div>
