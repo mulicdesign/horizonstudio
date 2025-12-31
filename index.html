@@ -2222,6 +2222,13 @@ Dugme će biti poravnato sa tekstom i slikom ispod*/
             alert('Hvala na poruci! Javićemo vam se uskoro.');
             contactForm.reset();
         });
+        // ===== PREVENT ACTIVE LANGUAGE RELOAD =====
+        document.querySelectorAll('.lang-switch a.active, .mobile-lang a.active').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Sprečava reload
+        });
+        });
+
     </script>
 </body>
 </html>
