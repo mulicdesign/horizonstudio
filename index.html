@@ -38,6 +38,12 @@
     <link rel="icon" href="assets/Favicon01.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/Favicon01.png">
 
+    <!-- Additional icon sizes for better display -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/android-chrome-512x512.png">
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1225,7 +1231,38 @@ Dugme će biti poravnato sa tekstom i slikom ispod*/
             }
         }
     </style>
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Horizon Studio",
+        "url": "https://horizonstudio.pro",
+        "logo": "https://horizonstudio.pro/assets/logo-schema.png",
+        "image": "https://horizonstudio.pro/assets/og-image-sr.png",
+        "description": "Profesionalan UI/UX i grafički dizajn za web, e-commerce i brend identitet. Dizajniramo jasna i funkcionalna rešenja — od ideje do korisničkog iskustva.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Novi Sad",
+            "addressCountry": "RS"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "aleksandar@horizonstudio.pro",
+            "contactType": "customer service"
+        },
+        "sameAs": [
+            "https://dribbble.com/MulicDesign",
+            "https://www.linkedin.com/in/mulicdesign/",
+            "https://www.instagram.com/horizon_studio_serbia/",
+            "https://x.com/SaleMulic"
+        ]
+    }
+    </script>
+   
 </head>
+
 <body>
     <!-- HEADER -->
     <header class="header" id="header">
