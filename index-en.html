@@ -54,6 +54,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         /* ===== RESET & VARIABLES ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -800,6 +801,38 @@
             background: var(--p);
             transform: translateY(-2px);
         }
+        
+                /* ===== FORM STATUS MESSAGES ===== */
+        .form-status {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 500;
+            text-align: center;
+            display: none;
+        }
+        .form-status.success {
+            background: rgba(0, 214, 214, 0.1);
+            border: 1px solid var(--cy);
+            color: var(--cy);
+            display: block;
+        }
+        .form-status.error {
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid #ff3b30;
+            color: #ff3b30;
+            display: block;
+        }
+        .submit-button:disabled {
+            background: var(--p);
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
 
         /* ===== FOOTER ===== */
         .footer {
@@ -2018,6 +2051,7 @@
                     <textarea id="message" name="message" placeholder="Enter your message..." required></textarea>
                 </div>
                 <button type="submit" class="submit-button">Send Message</button>
+                <div class="form-status" id="formStatus"></div>
             </form>
         </div>
     </section>
@@ -2275,6 +2309,7 @@
             });
         }
 
+        /*
         // ===== FORM SUBMISSION =====
         const contactForm = document.getElementById('contactForm');
         contactForm.addEventListener('submit', (e) => {
@@ -2282,6 +2317,64 @@
             alert('Thank you for your message! We will get back to you soon.');
             contactForm.reset();
         });
+        umesto form submision, zamenucu sve do prevent active language reload */
+
+ 
+        // ===== EMAILJS INITIALIZATION =====
+        (function() {
+            emailjs.init('IvHOtzc5iZPZLgVFh');
+        })();
+
+// ===== FORM SUBMISSION WITH EMAILJS =====
+        const contactForm = document.getElementById('contactForm');
+        const submitButton = contactForm.querySelector('.submit-button');
+        const formStatus = document.getElementById('formStatus');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+    
+    // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            formStatus.style.display = 'none';
+    
+    // Prepare template parameters
+            const templateParams = {
+                from_name: contactForm.name.value,
+                from_email: contactForm.email.value,
+                message: contactForm.message.value
+            };
+    
+    // Send email via EmailJS
+            emailjs.send('service_q1sh3on', 'template_fnbsols', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+            
+            // Show success message
+                    formStatus.className = 'form-status success';
+                    formStatus.textContent = '✅ Thank you! We'll get back to you within 24 hours.';
+            
+            // Reset form after 3 seconds
+                    setTimeout(function() {
+                        contactForm.reset();
+                        formStatus.style.display = 'none';
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Send Message';
+                    }, 3000);
+            
+                }, function(error) {
+                    console.log('FAILED...', error);
+            
+            // Show error message
+                    formStatus.className = 'form-status error';
+                    formStatus.textContent = '❌ Error sending message. Please check your connection or try again.';
+            
+            // Re-enable button
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Send Message';
+                });
+        });       
+
         // ===== PREVENT ACTIVE LANGUAGE RELOAD =====
         document.querySelectorAll('.lang-switch a.active, .mobile-lang a.active').forEach(link => {
             link.addEventListener('click', (e) => {
