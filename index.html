@@ -2357,6 +2357,7 @@ Dugme će biti poravnato sa tekstom i slikom ispod*/
             
             // Show success message
                     formStatus.className = 'form-status success';
+                    formStatus.style.display = 'block';  // ← DODAJ OVO
                     formStatus.textContent = '✅ Hvala na poruci! Javićemo vam se u roku od 24h.';
             
             // Reset form after 3 seconds
@@ -2372,6 +2373,7 @@ Dugme će biti poravnato sa tekstom i slikom ispod*/
             
             // Show error message
                     formStatus.className = 'form-status error';
+                    formStatus.style.display = 'block';
                     formStatus.textContent = '❌ Greška pri slanju. Proverite internet konekciju ili pokušajte ponovo.';
             
             // Re-enable button
