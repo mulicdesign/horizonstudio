@@ -9,7 +9,7 @@
     const CONFIG = {
         emailjs: {
             serviceId: 'service_q1sh3on',
-            templateId: 'template_wg0t6bl', // Template za Project Request
+            templateId: 'template_7gsyr67', // Template za Project Request
             publicKey: 'IvHOtzc5iZPZLgVFh'
         }
     };
