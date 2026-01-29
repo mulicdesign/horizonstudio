@@ -56,6 +56,95 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="project-request-modal.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    
+        // 1) HERO CTA - "Start Project"
+        const heroCTA = document.querySelector('.hero .cta-button');
+        if (heroCTA) {
+            heroCTA.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.ProjectRequestModal.open('hero', 'en');
+            });
+        }
+
+        // 2) PRICING BUTTONS - "Request a Quote"
+        document.querySelectorAll('.pricing-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+            
+                const card = this.closest('.pricing-card, .carousel-card');
+                if (!card) return;
+
+                const title = card.querySelector('.pricing-title')?.textContent.toLowerCase() || '';
+            
+                let entryPoint = 'hero';
+            
+                if (title.includes('starter')) {
+                    entryPoint = 'starter';
+                } else if (title.includes('standard')) {
+                    entryPoint = 'standard';
+                } else if (title.includes('premium')) {
+                    entryPoint = 'premium';
+                } else if (title.includes('business') || title.includes('your')) {
+                    entryPoint = 'specialized';
+                } else if (title.includes('additional')) {
+                    entryPoint = 'standalone';
+                }
+            
+                window.ProjectRequestModal.open(entryPoint, 'en');
+            });
+        });
+
+        // 3) GRAPHIC DESIGN CARDS (Desktop)
+        document.querySelectorAll('.graphic-card .pricing-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+            
+                const card = this.closest('.graphic-card');
+                if (!card) return;
+
+                const cardTitle = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+            
+                let entryPoint = 'logo';
+            
+                if (cardTitle.includes('logo') || cardTitle.includes('brand')) {
+                    entryPoint = 'logo';
+                } else if (cardTitle.includes('print') || cardTitle.includes('collateral')) {
+                    entryPoint = 'print';
+                } else if (cardTitle.includes('product') || cardTitle.includes('space')) {
+                    entryPoint = 'product';
+                }
+            
+                window.ProjectRequestModal.open(entryPoint, 'en');
+            });
+        });
+
+        // 4) GRAPHIC DESIGN ACCORDION (Mobile)
+        document.querySelectorAll('.accordion-body .pricing-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+            
+                const accordionItem = this.closest('.accordion-item');
+                if (!accordionItem) return;
+
+                const header = accordionItem.querySelector('.accordion-header span')?.textContent.toLowerCase() || '';
+            
+                let entryPoint = 'logo';
+            
+                if (header.includes('logo') || header.includes('brand')) {
+                    entryPoint = 'logo';
+                } else if (header.includes('print') || header.includes('collateral')) {
+                    entryPoint = 'print';
+                } else if (header.includes('product') || header.includes('space')) {
+                    entryPoint = 'product';
+                }
+            
+                window.ProjectRequestModal.open(entryPoint, 'en');
+            });
+        });
+    });
+    </script>
     <style>
         /* ===== RESET & VARIABLES ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
