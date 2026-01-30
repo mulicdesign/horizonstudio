@@ -91,7 +91,7 @@
             packaging: 'Dizajn ambalaže',
             bottles1: 'Flaše (1 strana)',
             bottles2: 'Flaše (2 strane)',
-            merchandise: 'Promotivni materijali',
+            merchandise: 'Brendirani proizvodi',
             menuUpdate: 'Izmena cenovnika/jelovnika',
             
             // Step 3
@@ -206,7 +206,7 @@
             packaging: 'Packaging Design',
             bottles1: 'Bottles (one-sided)',
             bottles2: 'Bottles (double-sided)',
-            merchandise: 'Merchandise',
+            merchandise: 'Branded Products',
             menuUpdate: 'Price List/Menu Update',
             
             // Step 3
