@@ -1146,10 +1146,23 @@
     }
 
     // ===== ATTACH CHECKBOX VISUAL FEEDBACK =====
+    // ===== ATTACH CHECKBOX VISUAL FEEDBACK =====
     function attachCheckboxListeners() {
         document.querySelectorAll('.pr-service-option input').forEach(input => {
             input.addEventListener('change', function() {
                 const parent = this.closest('.pr-service-option');
+                
+                // Ako je RADIO button - isključi sve ostale u istoj grupi
+                if (this.type === 'radio') {
+                    const group = this.closest('[data-group]');
+                    if (group) {
+                        group.querySelectorAll('.pr-service-option').forEach(opt => {
+                            opt.classList.remove('checked');
+                        });
+                    }
+                }
+                
+                // Dodaj checked klasu na trenutni
                 if (this.checked) {
                     parent.classList.add('checked');
                 } else {
