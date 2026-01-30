@@ -1052,60 +1052,93 @@
     }
 
     // ===== DYNAMIC LOCKING ON FIRST SELECTION (Hero CTA only) =====
+    // ===== DYNAMIC LOCKING ON FIRST SELECTION (Hero CTA only) =====
     function setupDynamicLocking() {
         if (entryPoint !== 'hero') return;
 
         const allInputs = document.querySelectorAll('.pr-service-option input');
-        let firstSelectionMade = false;
+        let currentActiveGroup = null; // Čuva trenutno aktivnu grupu
 
         allInputs.forEach(input => {
             input.addEventListener('change', function() {
-                if (firstSelectionMade) return;
-                if (!this.checked) return;
+                if (!this.checked) return; // Ignorisi uncheck
 
-                firstSelectionMade = true;
+                // Pronađi grupu kojoj pripada ovaj input
+                const selectedGroup = this.closest('[data-group]')?.getAttribute('data-group');
+                if (!selectedGroup) return;
 
-                // Determine which group was selected
-                const group = this.closest('[data-group]').getAttribute('data-group');
+                // Ako je ista grupa, samo nastavi (dozvoli checkbox-e unutar grupe)
+                if (selectedGroup === currentActiveGroup) return;
+
+                // NOVA GRUPA - resetuj sve i zaključaj druge
+                currentActiveGroup = selectedGroup;
+
+                // Isključi SVE checkbox-e/radio buttons OSIM u trenutnoj grupi
+                document.querySelectorAll('.pr-service-option input').forEach(otherInput => {
+                    const otherGroup = otherInput.closest('[data-group]')?.getAttribute('data-group');
                 
-                // Lock accordingly
-                if (group === 'uiux') {
-                    // Lock standalone, specialized, all graphic
-                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
-                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
-                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
-                    document.querySelector('[data-group="print"]')?.classList.add('locked');
-                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
-                } else if (group === 'standalone') {
-                    // Lock all others
-                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
-                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
-                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
-                    document.querySelector('[data-group="print"]')?.classList.add('locked');
-                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
-                } else if (group === 'specialized') {
-                    // Lock all others
-                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
-                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
-                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
-                    document.querySelector('[data-group="print"]')?.classList.add('locked');
-                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
-                } else if (group === 'logo_brand' || group === 'print' || group === 'product_space') {
-                    // Lock uiux, standalone, specialized, other graphic groups
-                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
-                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
-                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
-                    
-                    // Lock other graphic groups
+                    if (otherGroup !== selectedGroup) {
+                        otherInput.checked = false;
+                        otherInput.closest('.pr-service-option')?.classList.remove('checked');
+                    }
+                });
+
+                // Zaključaj/otključaj grupe
+                const groups = {
+                    uiux: document.querySelector('[data-group="uiux"]'),
+                    standalone: document.querySelector('[data-group="standalone"]'),
+                    specialized: document.querySelector('[data-group="specialized"]'),
+                    logo_brand: document.querySelector('[data-group="logo_brand"]'),
+                    print: document.querySelector('[data-group="print"]'),
+                    product_space: document.querySelector('[data-group="product_space"]')
+                };
+
+                // Prvo - otključaj SVE
+                Object.values(groups).forEach(group => {
+                    if (group) group.classList.remove('locked');
+                });
+
+                // Zatim - zaključaj po logici
+                if (selectedGroup === 'uiux') {
+                    // UI/UX izabran → zaključaj standalone, specialized, graphic
+                    if (groups.standalone) groups.standalone.classList.add('locked');
+                    if (groups.specialized) groups.specialized.classList.add('locked');
+                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
+                    if (groups.print) groups.print.classList.add('locked');
+                    if (groups.product_space) groups.product_space.classList.add('locked');
+                } 
+                else if (selectedGroup === 'standalone') {
+                    // Standalone → zaključaj sve ostale
+                    if (groups.uiux) groups.uiux.classList.add('locked');
+                    if (groups.specialized) groups.specialized.classList.add('locked');
+                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
+                    if (groups.print) groups.print.classList.add('locked');
+                    if (groups.product_space) groups.product_space.classList.add('locked');
+                }
+                else if (selectedGroup === 'specialized') {
+                    // Specialized → zaključaj sve ostale
+                    if (groups.uiux) groups.uiux.classList.add('locked');
+                    if (groups.standalone) groups.standalone.classList.add('locked');
+                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
+                    if (groups.print) groups.print.classList.add('locked');
+                    if (groups.product_space) groups.product_space.classList.add('locked');
+                }
+                else if (selectedGroup === 'logo_brand' || selectedGroup === 'print' || selectedGroup === 'product_space') {
+                    // Graphic Design → zaključaj UI/UX, standalone, specialized, druge graphic grupe
+                    if (groups.uiux) groups.uiux.classList.add('locked');
+                    if (groups.standalone) groups.standalone.classList.add('locked');
+                    if (groups.specialized) groups.specialized.classList.add('locked');
+                
                     ['logo_brand', 'print', 'product_space'].forEach(g => {
-                        if (g !== group) {
-                            document.querySelector(`[data-group="${g}"]`)?.classList.add('locked');
+                        if (g !== selectedGroup && groups[g]) {
+                            groups[g].classList.add('locked');
                         }
                     });
                 }
             });
         });
     }
+ 
 
     // ===== UPDATE LANGUAGE =====
     function updateLanguage() {
