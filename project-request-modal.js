@@ -1062,6 +1062,7 @@
         allInputs.forEach(input => {
             input.addEventListener('change', function() {
                 if (!this.checked) return; // Ignorisi uncheck
+                console.log('🔍 Input clicked:', this.id, this.value);  // ← DODAJ OVO
 
                 // Pronađi grupu kojoj pripada ovaj input
                 const selectedGroup = this.closest('[data-group]')?.getAttribute('data-group');
@@ -1069,6 +1070,7 @@
 
                 // Ako je ista grupa, samo nastavi (dozvoli checkbox-e unutar grupe)
                 if (selectedGroup === currentActiveGroup) return;
+                console.log('✅ MENJAM GRUPU:', currentActiveGroup, '→', selectedGroup);  // ← DODAJ OVO
 
                 // NOVA GRUPA - resetuj sve i zaključaj druge
                 currentActiveGroup = selectedGroup;
