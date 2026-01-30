@@ -1057,86 +1057,76 @@
         if (entryPoint !== 'hero') return;
 
         const allInputs = document.querySelectorAll('.pr-service-option input');
-        let currentActiveGroup = null; // Čuva trenutno aktivnu grupu
+        let currentActiveGroup = null;
 
         allInputs.forEach(input => {
             input.addEventListener('change', function() {
-                if (!this.checked) return; // Ignorisi uncheck
-                console.log('🔍 Input clicked:', this.id, this.value);  // ← DODAJ OVO
+                if (!this.checked) return;
 
-                // Pronađi grupu kojoj pripada ovaj input
                 const selectedGroup = this.closest('[data-group]')?.getAttribute('data-group');
                 if (!selectedGroup) return;
 
-                // Ako je ista grupa, samo nastavi (dozvoli checkbox-e unutar grupe)
-                if (selectedGroup === currentActiveGroup) return;
-                console.log('✅ MENJAM GRUPU:', currentActiveGroup, '→', selectedGroup);  // ← DODAJ OVO
+                console.log('🔍 Kliknuto:', selectedGroup, '| Prethodno:', currentActiveGroup);
 
-                // NOVA GRUPA - resetuj sve i zaključaj druge
+                // Ako je ISTA grupa - ne radi ništa (dozvoli više checkboxa u istoj grupi)
+                if (selectedGroup === currentActiveGroup) {
+                    console.log('✅ Ista grupa - dozvoljavam višestruku selekciju');
+                    return;
+                }
+
+                // NOVA GRUPA - resetuj sve
+                console.log('🔄 NOVA GRUPA! Resetujem...');
                 currentActiveGroup = selectedGroup;
 
-                // Isključi SVE checkbox-e/radio buttons OSIM u trenutnoj grupi
-                document.querySelectorAll('.pr-service-option input').forEach(otherInput => {
+                // 1) ISKLJUČI sve inpute iz DRUGIH grupa
+                allInputs.forEach(otherInput => {
                     const otherGroup = otherInput.closest('[data-group]')?.getAttribute('data-group');
-                
-                    if (otherGroup !== selectedGroup) {
+                    if (otherGroup && otherGroup !== selectedGroup) {
                         otherInput.checked = false;
                         otherInput.closest('.pr-service-option')?.classList.remove('checked');
                     }
                 });
 
-                // Zaključaj/otključaj grupe
-                const groups = {
-                    uiux: document.querySelector('[data-group="uiux"]'),
-                    standalone: document.querySelector('[data-group="standalone"]'),
-                    specialized: document.querySelector('[data-group="specialized"]'),
-                    logo_brand: document.querySelector('[data-group="logo_brand"]'),
-                    print: document.querySelector('[data-group="print"]'),
-                    product_space: document.querySelector('[data-group="product_space"]')
-                };
-
+                // 2) ZAKLJUČAJ/OTKLJUČAJ grupe
+                const allGroups = document.querySelectorAll('[data-group]');
+                
                 // Prvo - otključaj SVE
-                Object.values(groups).forEach(group => {
-                    if (group) group.classList.remove('locked');
+                allGroups.forEach(g => g.classList.remove('locked'));
+
+                // Zatim - zaključaj sve OSIM trenutne
+                allGroups.forEach(group => {
+                    const groupName = group.getAttribute('data-group');
+                    
+                    if (selectedGroup === 'uiux') {
+                        // UI/UX aktivna → zaključaj standalone, specialized, graphic
+                        if (['standalone', 'specialized', 'logo_brand', 'print', 'product_space'].includes(groupName)) {
+                            group.classList.add('locked');
+                        }
+                    } 
+                    else if (selectedGroup === 'standalone') {
+                        // Standalone aktivna → zaključaj SVE ostalo
+                        if (groupName !== 'standalone') {
+                            group.classList.add('locked');
+                        }
+                    }
+                    else if (selectedGroup === 'specialized') {
+                        // Specialized aktivna → zaključaj SVE ostalo
+                        if (groupName !== 'specialized') {
+                            group.classList.add('locked');
+                        }
+                    }
+                    else if (['logo_brand', 'print', 'product_space'].includes(selectedGroup)) {
+                        // Graphic grupa aktivna → zaključaj UI/UX, standalone, specialized + druge graphic
+                        if (groupName === 'uiux' || groupName === 'standalone' || groupName === 'specialized') {
+                            group.classList.add('locked');
+                        } else if (groupName !== selectedGroup) {
+                            // Zaključaj druge graphic grupe
+                            group.classList.add('locked');
+                        }
+                    }
                 });
 
-                // Zatim - zaključaj po logici
-                if (selectedGroup === 'uiux') {
-                    // UI/UX izabran → zaključaj standalone, specialized, graphic
-                    if (groups.standalone) groups.standalone.classList.add('locked');
-                    if (groups.specialized) groups.specialized.classList.add('locked');
-                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
-                    if (groups.print) groups.print.classList.add('locked');
-                    if (groups.product_space) groups.product_space.classList.add('locked');
-                } 
-                else if (selectedGroup === 'standalone') {
-                    // Standalone → zaključaj sve ostale
-                    if (groups.uiux) groups.uiux.classList.add('locked');
-                    if (groups.specialized) groups.specialized.classList.add('locked');
-                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
-                    if (groups.print) groups.print.classList.add('locked');
-                    if (groups.product_space) groups.product_space.classList.add('locked');
-                }
-                else if (selectedGroup === 'specialized') {
-                    // Specialized → zaključaj sve ostale
-                    if (groups.uiux) groups.uiux.classList.add('locked');
-                    if (groups.standalone) groups.standalone.classList.add('locked');
-                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
-                    if (groups.print) groups.print.classList.add('locked');
-                    if (groups.product_space) groups.product_space.classList.add('locked');
-                }
-                else if (selectedGroup === 'logo_brand' || selectedGroup === 'print' || selectedGroup === 'product_space') {
-                    // Graphic Design → zaključaj UI/UX, standalone, specialized, druge graphic grupe
-                    if (groups.uiux) groups.uiux.classList.add('locked');
-                    if (groups.standalone) groups.standalone.classList.add('locked');
-                    if (groups.specialized) groups.specialized.classList.add('locked');
-                
-                    ['logo_brand', 'print', 'product_space'].forEach(g => {
-                        if (g !== selectedGroup && groups[g]) {
-                            groups[g].classList.add('locked');
-                        }
-                    });
-                }
+                console.log('✅ Zaključane grupe osvežene!');
             });
         });
     }
