@@ -1052,81 +1052,58 @@
     }
 
     // ===== DYNAMIC LOCKING ON FIRST SELECTION (Hero CTA only) =====
-    // ===== DYNAMIC LOCKING ON FIRST SELECTION (Hero CTA only) =====
+
     function setupDynamicLocking() {
         if (entryPoint !== 'hero') return;
 
         const allInputs = document.querySelectorAll('.pr-service-option input');
-        let currentActiveGroup = null;
+        let firstSelectionMade = false;
 
         allInputs.forEach(input => {
             input.addEventListener('change', function() {
+                if (firstSelectionMade) return;
                 if (!this.checked) return;
 
-                const selectedGroup = this.closest('[data-group]')?.getAttribute('data-group');
-                if (!selectedGroup) return;
+                firstSelectionMade = true;
 
-                console.log('🔍 Kliknuto:', selectedGroup, '| Prethodno:', currentActiveGroup);
-
-                // Ako je ISTA grupa - ne radi ništa (dozvoli više checkboxa u istoj grupi)
-                if (selectedGroup === currentActiveGroup) {
-                    console.log('✅ Ista grupa - dozvoljavam višestruku selekciju');
-                    return;
-                }
-
-                // NOVA GRUPA - resetuj sve
-                console.log('🔄 NOVA GRUPA! Resetujem...');
-                currentActiveGroup = selectedGroup;
-
-                // 1) ISKLJUČI sve inpute iz DRUGIH grupa
-                allInputs.forEach(otherInput => {
-                    const otherGroup = otherInput.closest('[data-group]')?.getAttribute('data-group');
-                    if (otherGroup && otherGroup !== selectedGroup) {
-                        otherInput.checked = false;
-                        otherInput.closest('.pr-service-option')?.classList.remove('checked');
-                    }
-                });
-
-                // 2) ZAKLJUČAJ/OTKLJUČAJ grupe
-                const allGroups = document.querySelectorAll('[data-group]');
+                // Determine which group was selected
+                const group = this.closest('[data-group]').getAttribute('data-group');
                 
-                // Prvo - otključaj SVE
-                allGroups.forEach(g => g.classList.remove('locked'));
-
-                // Zatim - zaključaj sve OSIM trenutne
-                allGroups.forEach(group => {
-                    const groupName = group.getAttribute('data-group');
+                // Lock accordingly
+                if (group === 'uiux') {
+                    // Lock standalone, specialized, all graphic
+                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
+                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
+                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
+                    document.querySelector('[data-group="print"]')?.classList.add('locked');
+                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
+                } else if (group === 'standalone') {
+                    // Lock all others
+                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
+                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
+                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
+                    document.querySelector('[data-group="print"]')?.classList.add('locked');
+                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
+                } else if (group === 'specialized') {
+                    // Lock all others
+                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
+                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
+                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
+                    document.querySelector('[data-group="print"]')?.classList.add('locked');
+                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
+                } else if (group === 'logo_brand' || group === 'print' || group === 'product_space') {
+                    // Lock uiux, standalone, specialized, other graphic groups
+                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
+                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
+                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
                     
-                    if (selectedGroup === 'uiux') {
-                        // UI/UX aktivna → zaključaj standalone, specialized, graphic
-                        if (['standalone', 'specialized', 'logo_brand', 'print', 'product_space'].includes(groupName)) {
-                            group.classList.add('locked');
+                    // Lock other graphic groups
+                    ['logo_brand', 'print', 'product_space'].forEach(g => {
+                        if (g !== group) {
+                            document.querySelector(`[data-group="${g}"]`)?.classList.add('locked');
                         }
-                    } 
-                    else if (selectedGroup === 'standalone') {
-                        // Standalone aktivna → zaključaj SVE ostalo
-                        if (groupName !== 'standalone') {
-                            group.classList.add('locked');
-                        }
-                    }
-                    else if (selectedGroup === 'specialized') {
-                        // Specialized aktivna → zaključaj SVE ostalo
-                        if (groupName !== 'specialized') {
-                            group.classList.add('locked');
-                        }
-                    }
-                    else if (['logo_brand', 'print', 'product_space'].includes(selectedGroup)) {
-                        // Graphic grupa aktivna → zaključaj UI/UX, standalone, specialized + druge graphic
-                        if (groupName === 'uiux' || groupName === 'standalone' || groupName === 'specialized') {
-                            group.classList.add('locked');
-                        } else if (groupName !== selectedGroup) {
-                            // Zaključaj druge graphic grupe
-                            group.classList.add('locked');
-                        }
-                    }
-                });
-
-                console.log('✅ Zaključane grupe osvežene!');
+                    });
+                }
             });
         });
     }
