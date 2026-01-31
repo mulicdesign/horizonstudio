@@ -562,8 +562,7 @@
                 margin-bottom: 24px;
                 max-height: 400px;
                 overflow-y: auto;
-                padding: 8px 8px 8px 0; /* ← PROMENI (gore 8px, dole 8px) */
-                border-radius: 8px; /* ← DODAJ */
+                padding-right: 8px;
             }
             .pr-services-container::-webkit-scrollbar {
                 width: 6px;
