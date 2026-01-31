@@ -108,12 +108,12 @@
             
                 let entryPoint = 'logo';
             
-                if (cardTitle.includes('logo') || cardTitle.includes('brand')) {
-                    entryPoint = 'logo';
+                if (cardTitle.includes('product') || cardTitle.includes('space')) {
+                    entryPoint = 'product';
                 } else if (cardTitle.includes('print') || cardTitle.includes('collateral')) {
                     entryPoint = 'print';
-                } else if (cardTitle.includes('product') || cardTitle.includes('space')) {
-                    entryPoint = 'product';
+                } else if (cardTitle.includes('logo') || cardTitle.includes('brand')) {
+                    entryPoint = 'logo';
                 }
             
                 window.ProjectRequestModal.open(entryPoint, 'en');
@@ -132,12 +132,12 @@
             
                 let entryPoint = 'logo';
             
-                if (header.includes('logo') || header.includes('brand')) {
-                    entryPoint = 'logo';
+                if (header.includes('product') || header.includes('space')) {
+                    entryPoint = 'product';
                 } else if (header.includes('print') || header.includes('collateral')) {
                     entryPoint = 'print';
-                } else if (header.includes('product') || header.includes('space')) {
-                    entryPoint = 'product';
+                } else if (header.includes('logo') || header.includes('brand')) {
+                    entryPoint = 'logo';
                 }
             
                 window.ProjectRequestModal.open(entryPoint, 'en');
