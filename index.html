@@ -102,12 +102,12 @@
             
                 let entryPoint = 'logo';
             
-                if (cardTitle.includes('logo') || cardTitle.includes('brend')) {
-                    entryPoint = 'logo';
+                if (cardTitle.includes('brendiranje') || cardTitle.includes('proizvod') || cardTitle.includes('prostora')) {
+                    entryPoint = 'product';
                 } else if (cardTitle.includes('promotivni')) {
                     entryPoint = 'print';
-                } else if (cardTitle.includes('brendiranje') || cardTitle.includes('proizvod')) {
-                    entryPoint = 'product';
+                } else if (cardTitle.includes('logo') || cardTitle.includes('brend')) {
+                    entryPoint = 'logo';
                 }
             
                 window.ProjectRequestModal.open(entryPoint, 'sr');
@@ -126,12 +126,12 @@
             
                 let entryPoint = 'logo';
             
-                if (header.includes('logo') || header.includes('brend')) {
-                    entryPoint = 'logo';
+                if (header.includes('brendiranje') || header.includes('proizvod') || header.includes('prostora')) {
+                    entryPoint = 'product';
                 } else if (header.includes('promotivni')) {
                     entryPoint = 'print';
-                } else if (header.includes('brendiranje') || header.includes('proizvod')) {
-                    entryPoint = 'product';
+                } else if (header.includes('logo') || header.includes('brend')) {
+                    entryPoint = 'logo';
                 }
             
                 window.ProjectRequestModal.open(entryPoint, 'sr');
