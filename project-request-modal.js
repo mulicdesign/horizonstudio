@@ -781,10 +781,7 @@
                         <input type="radio" name="uiux_package" id="pr_premium" value="premium">
                         <label for="pr_premium">${lang.premium}</label>
                     </div>
-                    <div class="pr-service-option">
-                        <input type="radio" name="uiux_package" id="pr_custom" value="custom">
-                        <label for="pr_custom">${lang.custom}</label>
-                    </div>
+                    
                 </div>
             </div>
 
