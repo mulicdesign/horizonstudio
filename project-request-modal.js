@@ -563,6 +563,7 @@
                 max-height: 400px;
                 overflow-y: auto;
                 padding-right: 8px;
+                border-radius: 8px; /* ← DODAJ */
             }
             .pr-services-container::-webkit-scrollbar {
                 width: 6px;
