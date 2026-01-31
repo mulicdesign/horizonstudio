@@ -406,10 +406,12 @@
                 width: 90%;
                 max-width: 680px;
                 max-height: 90vh;
-                overflow-y: auto;
+                overflow: hidden; /* ← PROMENI sa auto na hidden */
                 padding: 40px;
                 box-shadow: 0 20px 60px rgba(0, 214, 214, 0.3);
                 animation: prModalSlideIn 0.3s ease-out;
+                display: flex; /* ← DODAJ */
+                flex-direction: column; /* ← DODAJ */
             }
             @keyframes prModalSlideIn {
                 from {
@@ -496,6 +498,9 @@
             .pr-step.active {
                 display: block;
                 animation: prFadeIn 0.3s ease-out;
+                overflow-y: auto; /* ← DODAJ scroll ovde */
+                max-height: calc(90vh - 180px); /* ← Ograniči visinu (90vh - padding/progress) */
+                padding-right: 8px; /* ← Razmak za scroll bar */
             }
             @keyframes prFadeIn {
                 from { opacity: 0; }
