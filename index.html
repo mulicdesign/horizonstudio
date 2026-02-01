@@ -954,7 +954,7 @@
         .social-icons {
             display: flex;
             gap: 16px;
-            justify-content: flex-start; /* ← DODAJ (poravnanje sa levom ivicom) */
+            margin-left: 0; /* ← Proveri da nema margin-a */
         }
         .social-icons a {
             width: 40px;
@@ -1016,6 +1016,7 @@
             line-height: 24px;
             font-weight: 400;
             color: var(--w);
+            
         }
         .footer-bottom {
             background: var(--black);
