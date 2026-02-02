@@ -1051,18 +1051,64 @@
                 if (groups.print) groups.print.classList.add('locked');
                 break;
         }
-        // Auto-scroll to unlocked group
-        setTimeout(() => {
-            const unlockedGroup = document.querySelector('.pr-service-group:not(.locked)');
-            if (unlockedGroup && entry !== 'hero') {
-                unlockedGroup.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }, 300);
     }
 
     // ===== DYNAMIC LOCKING ON FIRST SELECTION (Hero CTA only) =====
 
-    function setupDynamicLocking
+    function setupDynamicLocking() {
+        if (entryPoint !== 'hero') return;
+
+        const allInputs = document.querySelectorAll('.pr-service-option input');
+        let firstSelectionMade = false;
+
+        allInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                if (firstSelectionMade) return;
+                if (!this.checked) return;
+
+                firstSelectionMade = true;
+
+                // Determine which group was selected
+                const group = this.closest('[data-group]').getAttribute('data-group');
+                
+                // Lock accordingly
+                if (group === 'uiux') {
+                    // Lock standalone, specialized, all graphic
+                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
+                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
+                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
+                    document.querySelector('[data-group="print"]')?.classList.add('locked');
+                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
+                } else if (group === 'standalone') {
+                    // Lock all others
+                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
+                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
+                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
+                    document.querySelector('[data-group="print"]')?.classList.add('locked');
+                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
+                } else if (group === 'specialized') {
+                    // Lock all others
+                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
+                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
+                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
+                    document.querySelector('[data-group="print"]')?.classList.add('locked');
+                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
+                } else if (group === 'logo_brand' || group === 'print' || group === 'product_space') {
+                    // Lock uiux, standalone, specialized, other graphic groups
+                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
+                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
+                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
+                    
+                    // Lock other graphic groups
+                    ['logo_brand', 'print', 'product_space'].forEach(g => {
+                        if (g !== group) {
+                            document.querySelector(`[data-group="${g}"]`)?.classList.add('locked');
+                        }
+                    });
+                }
+            });
+        });
+    }
  
 
     // ===== UPDATE LANGUAGE =====
