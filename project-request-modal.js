@@ -974,84 +974,84 @@
 
     // ===== LOCKING LOGIC =====
     function applyLockingLogic(entry) {
-        const groups = {
-            uiux: document.querySelector('[data-group="uiux"]'),
-            standalone: document.querySelector('[data-group="standalone"]'),
-            specialized: document.querySelector('[data-group="specialized"]'),
-            logo_brand: document.querySelector('[data-group="logo_brand"]'),
-            print: document.querySelector('[data-group="print"]'),
-            product_space: document.querySelector('[data-group="product_space"]')
-        };
+            const groups = {
+                uiux: document.querySelector('[data-group="uiux"]'),
+                standalone: document.querySelector('[data-group="standalone"]'),
+                specialized: document.querySelector('[data-group="specialized"]'),
+                logo_brand: document.querySelector('[data-group="logo_brand"]'),
+                print: document.querySelector('[data-group="print"]'),
+                product_space: document.querySelector('[data-group="product_space"]')
+            };
 
-        // Reset all
-        Object.values(groups).forEach(group => {
-            if (group) group.classList.remove('locked');
-        });
+            // Reset all
+            Object.values(groups).forEach(group => {
+                if (group) group.classList.remove('locked');
+            });
 
-        switch(entry) {
-            case 'hero':
-                // All unlocked initially
-                break;
-            
-            case 'starter':
-            case 'standard':
-            case 'premium':
-                // Pre-check the package
-                document.getElementById(`pr_${entry}`).checked = true;
-                // Lock other UI/UX, standalone, specialized, graphic
-                if (groups.standalone) groups.standalone.classList.add('locked');
-                if (groups.specialized) groups.specialized.classList.add('locked');
-                if (groups.logo_brand) groups.logo_brand.classList.add('locked');
-                if (groups.print) groups.print.classList.add('locked');
-                if (groups.product_space) groups.product_space.classList.add('locked');
-                break;
-            
-            case 'standalone':
-                // Only standalone active
-                if (groups.uiux) groups.uiux.classList.add('locked');
-                if (groups.specialized) groups.specialized.classList.add('locked');
-                if (groups.logo_brand) groups.logo_brand.classList.add('locked');
-                if (groups.print) groups.print.classList.add('locked');
-                if (groups.product_space) groups.product_space.classList.add('locked');
-                break;
-            
-            case 'specialized':
-                // Only specialized active
-                if (groups.uiux) groups.uiux.classList.add('locked');
-                if (groups.standalone) groups.standalone.classList.add('locked');
-                if (groups.logo_brand) groups.logo_brand.classList.add('locked');
-                if (groups.print) groups.print.classList.add('locked');
-                if (groups.product_space) groups.product_space.classList.add('locked');
-                break;
-            
-            case 'logo':
-                // Only logo_brand active
-                if (groups.uiux) groups.uiux.classList.add('locked');
-                if (groups.standalone) groups.standalone.classList.add('locked');
-                if (groups.specialized) groups.specialized.classList.add('locked');
-                if (groups.print) groups.print.classList.add('locked');
-                if (groups.product_space) groups.product_space.classList.add('locked');
-                break;
-            
-            case 'print':
-                // Only print active
-                if (groups.uiux) groups.uiux.classList.add('locked');
-                if (groups.standalone) groups.standalone.classList.add('locked');
-                if (groups.specialized) groups.specialized.classList.add('locked');
-                if (groups.logo_brand) groups.logo_brand.classList.add('locked');
-                if (groups.product_space) groups.product_space.classList.add('locked');
-                break;
-            
-            case 'product':
-                // Only product_space active
-                if (groups.uiux) groups.uiux.classList.add('locked');
-                if (groups.standalone) groups.standalone.classList.add('locked');
-                if (groups.specialized) groups.specialized.classList.add('locked');
-                if (groups.logo_brand) groups.logo_brand.classList.add('locked');
-                if (groups.print) groups.print.classList.add('locked');
-                break;
+            switch(entry) {
+                case 'hero':
+                    // All unlocked initially
+                    break;
+                
+                case 'starter':
+                case 'standard':
+                case 'premium':
+                    // Pre-check the package
+                    document.getElementById(`pr_${entry}`).checked = true;
+                    // Lock other UI/UX, standalone, specialized, graphic
+                    if (groups.standalone) groups.standalone.classList.add('locked');
+                    if (groups.specialized) groups.specialized.classList.add('locked');
+                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
+                    if (groups.print) groups.print.classList.add('locked');
+                    if (groups.product_space) groups.product_space.classList.add('locked');
+                    break;
+                
+                case 'standalone':
+                    // Only standalone active
+                    if (groups.uiux) groups.uiux.classList.add('locked');
+                    if (groups.specialized) groups.specialized.classList.add('locked');
+                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
+                    if (groups.print) groups.print.classList.add('locked');
+                    if (groups.product_space) groups.product_space.classList.add('locked');
+                    break;
+                
+                case 'specialized':
+                    // Only specialized active
+                    if (groups.uiux) groups.uiux.classList.add('locked');
+                    if (groups.standalone) groups.standalone.classList.add('locked');
+                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
+                    if (groups.print) groups.print.classList.add('locked');
+                    if (groups.product_space) groups.product_space.classList.add('locked');
+                    break;
+                
+                case 'logo':
+                    // Only logo_brand active
+                    if (groups.uiux) groups.uiux.classList.add('locked');
+                    if (groups.standalone) groups.standalone.classList.add('locked');
+                    if (groups.specialized) groups.specialized.classList.add('locked');
+                    if (groups.print) groups.print.classList.add('locked');
+                    if (groups.product_space) groups.product_space.classList.add('locked');
+                    break;
+                
+                case 'print':
+                    // Only print active
+                    if (groups.uiux) groups.uiux.classList.add('locked');
+                    if (groups.standalone) groups.standalone.classList.add('locked');
+                    if (groups.specialized) groups.specialized.classList.add('locked');
+                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
+                    if (groups.product_space) groups.product_space.classList.add('locked');
+                    break;
+                
+                case 'product':
+                    // Only product_space active
+                    if (groups.uiux) groups.uiux.classList.add('locked');
+                    if (groups.standalone) groups.standalone.classList.add('locked');
+                    if (groups.specialized) groups.specialized.classList.add('locked');
+                    if (groups.logo_brand) groups.logo_brand.classList.add('locked');
+                    if (groups.print) groups.print.classList.add('locked');
+                    break;
+            }
         }
-    }
 
     // ===== DYNAMIC LOCKING ON FIRST SELECTION (Hero CTA only) =====
 
