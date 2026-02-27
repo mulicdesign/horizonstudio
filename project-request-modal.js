@@ -1055,57 +1055,34 @@
 
     // ===== DYNAMIC LOCKING ON FIRST SELECTION (Hero CTA only) =====
 
+    // ===== DYNAMIC GROUP SWITCHING (Hero CTA only) =====
     function setupDynamicLocking() {
         if (entryPoint !== 'hero') return;
 
         const allInputs = document.querySelectorAll('.pr-service-option input');
-        let firstSelectionMade = false;
+        let currentActiveGroup = null;
 
         allInputs.forEach(input => {
             input.addEventListener('change', function() {
-                if (firstSelectionMade) return;
-                if (!this.checked) return;
+                if (!this.checked) return; // Ignore uncheck
 
-                firstSelectionMade = true;
+                // Determine which group this input belongs to
+                const selectedGroup = this.closest('[data-group]')?.getAttribute('data-group');
+                if (!selectedGroup) return;
 
-                // Determine which group was selected
-                const group = this.closest('[data-group]').getAttribute('data-group');
-                
-                // Lock accordingly
-                if (group === 'uiux') {
-                    // Lock standalone, specialized, all graphic
-                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
-                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
-                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
-                    document.querySelector('[data-group="print"]')?.classList.add('locked');
-                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
-                } else if (group === 'standalone') {
-                    // Lock all others
-                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
-                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
-                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
-                    document.querySelector('[data-group="print"]')?.classList.add('locked');
-                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
-                } else if (group === 'specialized') {
-                    // Lock all others
-                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
-                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
-                    document.querySelector('[data-group="logo_brand"]')?.classList.add('locked');
-                    document.querySelector('[data-group="print"]')?.classList.add('locked');
-                    document.querySelector('[data-group="product_space"]')?.classList.add('locked');
-                } else if (group === 'logo_brand' || group === 'print' || group === 'product_space') {
-                    // Lock uiux, standalone, specialized, other graphic groups
-                    document.querySelector('[data-group="uiux"]')?.classList.add('locked');
-                    document.querySelector('[data-group="standalone"]')?.classList.add('locked');
-                    document.querySelector('[data-group="specialized"]')?.classList.add('locked');
-                    
-                    // Lock other graphic groups
-                    ['logo_brand', 'print', 'product_space'].forEach(g => {
-                        if (g !== group) {
-                            document.querySelector(`[data-group="${g}"]`)?.classList.add('locked');
-                        }
-                    });
-                }
+                // If same group - do nothing (allow multiple checkboxes within group)
+                if (selectedGroup === currentActiveGroup) return;
+
+                // NEW GROUP SELECTED - uncheck all inputs from OTHER groups
+                currentActiveGroup = selectedGroup;
+
+                allInputs.forEach(otherInput => {
+                    const otherGroup = otherInput.closest('[data-group]')?.getAttribute('data-group');
+                    if (otherGroup && otherGroup !== selectedGroup) {
+                        otherInput.checked = false;
+                        otherInput.closest('.pr-service-option')?.classList.remove('checked');
+                    }
+                });
             });
         });
     }
